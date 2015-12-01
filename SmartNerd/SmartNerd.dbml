@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db_jmcdonne" EntityNamespace="DataModels" Class="SmartNerdDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=sql04.ok.ubc.ca;Initial Catalog=db_jmcdonne;Persist Security Info=True;User ID=jmcdonne;TrustServerCertificate=True;Authentication=&quot;Sql Password&quot;" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="db_jmcdonneConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="jmcdonne.Category" Member="Categories">
+    <Type Name="Category">
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Category_CategoryEntry" Member="CategoryEntries" ThisKey="CategoryID" OtherKey="CategoryID" Type="CategoryEntry" />
+    </Type>
+  </Table>
+  <Table Name="jmcdonne.CategoryEntry" Member="CategoryEntries">
+    <Type Name="CategoryEntry">
+      <Column Name="CategoryEntryID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Category_CategoryEntry" Member="Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="Category" IsForeignKey="true" />
+      <Association Name="Product_CategoryEntry" Member="Product" ThisKey="ProductID" OtherKey="ProductID" Type="Product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="jmcdonne.Product" Member="Products">
+    <Type Name="Product">
+      <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Product_CategoryEntry" Member="CategoryEntries" ThisKey="ProductID" OtherKey="ProductID" Type="CategoryEntry" />
+    </Type>
+  </Table>
+</Database>

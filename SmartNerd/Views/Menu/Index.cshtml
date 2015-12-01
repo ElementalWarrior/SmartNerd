@@ -1,0 +1,37 @@
+﻿@model SmartNerd.Models.Menu.MenuPage
+<style>
+    #menuListing img
+    {
+        background: #f00;
+        display: block;
+        height: 150px;
+    }
+    #menuListing a
+    {
+        display: block;
+    }
+    #menuListing div {
+        padding-bottom: 15px;
+        padding-top: 15px;
+    }
+</style>
+<div class="col-sm-2">
+    <div class="sideCategory">
+        <h3>Categories</h3>
+        <ol>
+            @foreach(var cat in Model.Categories)
+            {
+                <li><a href="#">@cat.CategoryName</a></li>
+            }
+        </ol>
+    </div>
+</div>
+<div class="col-sm-10">
+    <h2>Index</h2>
+    <div id="menuListing" class="row">
+        @foreach (var cat in Model.Products)
+        {
+            <div class="col-sm-4 col-md-3"><a><img src="#"/><span>@cat.ProductName</span></a></div>
+        }
+    </div>
+</div>
