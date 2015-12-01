@@ -57,10 +57,12 @@ create table Orders
 (
 	OrderID int primary key,
 	AccountID int not null,
+	CartID uniqueidentifier default newid() not null,
 	OrderTotal decimal,
 	DateCreated datetime not null,
 	DatePlaced datetime
 );
+
 --create table DeliveryOrder
 --(
 --	DeliveryOrderID int primary key,

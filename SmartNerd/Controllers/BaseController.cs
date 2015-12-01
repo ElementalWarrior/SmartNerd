@@ -8,5 +8,6 @@ namespace SmartNerd.Controllers
 {
     public class BaseController : Controller
     {
+        Cart Cart { get; set; }
 	}
 }

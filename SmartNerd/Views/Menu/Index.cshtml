@@ -21,7 +21,7 @@
         <ol>
             @foreach(var cat in Model.Categories)
             {
-                <li><a href="#">@cat.CategoryName</a></li>
+                <li><a href="@Url.Action("Index", "Menu", new {categoryID = cat.CategoryID})">@cat.CategoryName</a></li>
             }
         </ol>
     </div>
@@ -29,9 +29,9 @@
 <div class="col-sm-10">
     <h2>Index</h2>
     <div id="menuListing" class="row">
-        @foreach (var cat in Model.Products)
+        @foreach (var prod in Model.Products)
         {
-            <div class="col-sm-4 col-md-3"><a><img src="#"/><span>@cat.ProductName</span></a></div>
+            <div class="col-sm-4 col-md-3"><a href="@Url.Action("Product", "Menu", new { productID = prod.ProductID })"><img src="#"/><span>@prod.ProductName</span></a></div>
         }
     </div>
 </div>
