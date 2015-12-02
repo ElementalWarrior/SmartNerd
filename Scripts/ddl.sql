@@ -1,14 +1,14 @@
-drop table AnonymousReview;
-drop table RegisteredReview;
-drop table Review;
+--drop table AnonymousReview;
+--drop table RegisteredReview;
+--drop table Review;
 drop table CategoryEntry;
 drop table Category;
 drop table OrderProduct;
 drop table Inventory;
 drop table Product;
-drop table PickupOrder;
+--drop table PickupOrder;
 drop table PhysicalLocation;
-drop table DeliveryOrder;
+--drop table DeliveryOrder;
 drop table Orders;
 drop table AccountAddress;
 drop table Address;
@@ -35,7 +35,7 @@ create table AccountAddress
 );
 create table Orders
 (
-	OrderID int primary key,
+	OrderID int primary key identity(1,1),
 	AccountID int not null,
 	CartID uniqueidentifier default newid() not null,
 	OrderTotal decimal,
@@ -85,7 +85,7 @@ create table Inventory
 );
 create table OrderProduct
 (
-	OrderProductID int primary key,
+	OrderProductID int primary key identity(1,1),
 	ProductID int not null,
 	OrderID int not null,
 	Quantity int not null,

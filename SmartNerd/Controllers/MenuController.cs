@@ -94,6 +94,11 @@ namespace SmartNerd.Controllers
         {
             if(ModelState.IsValid)
             {
+                if(Cart.OrderID == 0)
+                {
+                    Cart.Save();
+                    Session["CartID"] = Cart.CartID;
+                }
                 Cart.AddProduct(prod);
                 Cart.Save();
             }

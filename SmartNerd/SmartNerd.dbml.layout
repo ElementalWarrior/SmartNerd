@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.125" name="SmartNerd">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 10.125" name="SmartNerd">
   <DataContextMoniker Name="/SmartNerdDataContext" />
   <nestedChildShapes>
     <classShape Id="866f73a9-41c4-4c08-8193-a9056b8460bd" absoluteBounds="1.375, 1.125, 2, 1.1939925130208333">
@@ -14,23 +14,10 @@
         <elementListCompartment Id="a51deb76-f478-4999-8e35-cabb741664e9" absoluteBounds="4.515, 3.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="82a9f66a-cfe3-4ba1-b542-659063a0f5aa" absoluteBounds="0.75, 3.875, 2, 1.7708968098958327">
-      <DataClassMoniker Name="/SmartNerdDataContext/Product" />
-      <nestedChildShapes>
-        <elementListCompartment Id="6d9f76e8-d008-461d-9c2a-8b9ddd3648fe" absoluteBounds="0.765, 4.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <associationConnector edgePoints="[(3.375 : 1.72199625651042); (5.5 : 1.72199625651042); (5.5 : 2.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/SmartNerdDataContext/Category/Category_CategoryEntry" />
       <nodes>
         <classShapeMoniker Id="866f73a9-41c4-4c08-8193-a9056b8460bd" />
-        <classShapeMoniker Id="d626e255-57aa-4dba-8daf-1e200e1eaf46" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 4.41189747265625); (5.9375 : 4.41189747265625); (5.9375 : 4.1362939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/SmartNerdDataContext/Product/Product_CategoryEntry" />
-      <nodes>
-        <classShapeMoniker Id="82a9f66a-cfe3-4ba1-b542-659063a0f5aa" />
         <classShapeMoniker Id="d626e255-57aa-4dba-8daf-1e200e1eaf46" />
       </nodes>
     </associationConnector>
@@ -40,23 +27,36 @@
         <elementListCompartment Id="7eb494de-85ff-45f1-b65f-a58c12f404d9" absoluteBounds="3.515, 5.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 5.32294840494792); (3.5 : 5.32294840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/SmartNerdDataContext/Product/Product_OrderProduct" />
+    <classShape Id="fcf70ef7-a3c3-43a8-ab84-0ce44e0d3cee" absoluteBounds="1.625, 7.875, 2, 1.9631982421875">
+      <DataClassMoniker Name="/SmartNerdDataContext/Order" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8252f43a-b0d7-4ad4-a72a-5121cbf10542" absoluteBounds="1.6399999999999997, 8.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.625 : 8.85659912109375); (4.5625005 : 8.85659912109375); (4.5625005 : 6.57859537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SmartNerdDataContext/Order/Order_OrderProduct" />
       <nodes>
-        <classShapeMoniker Id="82a9f66a-cfe3-4ba1-b542-659063a0f5aa" />
+        <classShapeMoniker Id="fcf70ef7-a3c3-43a8-ab84-0ce44e0d3cee" />
         <classShapeMoniker Id="7daa8917-8048-4469-9e70-f0b7fed8f2ec" />
       </nodes>
     </associationConnector>
-    <classShape Id="6bd41291-18ba-4476-bb96-6b9406fc77be" absoluteBounds="1.125, 6.875, 2, 1.9631982421875">
-      <DataClassMoniker Name="/SmartNerdDataContext/Order" />
+    <classShape Id="55dd42c8-03a6-4c58-aeac-17de2afc4e29" absoluteBounds="1.25, 4.375, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/SmartNerdDataContext/Product" />
       <nestedChildShapes>
-        <elementListCompartment Id="112cbcf0-7f83-4565-827e-ff984a729196" absoluteBounds="1.1400000000000001, 7.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="33b03410-e47b-4ddf-8285-e1796ff7ebce" absoluteBounds="1.2650000000000001, 4.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.125 : 6.875); (3.5 : 6.57859537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/SmartNerdDataContext/Order/Order_OrderProduct" />
+    <associationConnector edgePoints="[(3.25 : 4.65625); (6.03125 : 4.65625); (6.03125 : 4.1362939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SmartNerdDataContext/Product/Product_CategoryEntry" />
       <nodes>
-        <classShapeMoniker Id="6bd41291-18ba-4476-bb96-6b9406fc77be" />
+        <classShapeMoniker Id="55dd42c8-03a6-4c58-aeac-17de2afc4e29" />
+        <classShapeMoniker Id="d626e255-57aa-4dba-8daf-1e200e1eaf46" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.25 : 5.57294840494792); (3.5 : 5.57294840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SmartNerdDataContext/Product/Product_OrderProduct" />
+      <nodes>
+        <classShapeMoniker Id="55dd42c8-03a6-4c58-aeac-17de2afc4e29" />
         <classShapeMoniker Id="7daa8917-8048-4469-9e70-f0b7fed8f2ec" />
       </nodes>
     </associationConnector>

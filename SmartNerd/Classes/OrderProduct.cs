@@ -8,6 +8,7 @@ namespace SmartNerd
     public class OrderProduct
     {
         private DataModels.OrderProduct _product;
+        private decimal? _price = null;
 
         public OrderProduct(DataModels.OrderProduct p)
         {
@@ -35,7 +36,15 @@ namespace SmartNerd
         {
             get
             {
-                return _product.Product.Price;
+                if (_price == null)
+                {
+                    return _product.Product.Price;
+                }
+                return _price.Value;
+            }
+            set
+            {
+                _price = value;
             }
         }
     }

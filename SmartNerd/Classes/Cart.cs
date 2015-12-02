@@ -9,7 +9,7 @@ namespace SmartNerd
     {
         private SmartNerdDataContext _context;
         private DataModels.Order _order;
-        private IEnumerable<OrderProduct> _products;
+        private List<OrderProduct> _products;
 
         public Cart()
         {
@@ -32,6 +32,13 @@ namespace SmartNerd
             }
             //we don't ever want to change this, so no set
         }
+        public Guid CartID
+        {
+            get
+            {
+                return _order.CartID;
+            }
+        }
         #endregion
 
         #region "Public Methods"
@@ -43,7 +50,7 @@ namespace SmartNerd
                 {
                     _products = (from op in _context.OrderProducts
                                  where op.OrderID == _order.OrderID
-                                 select new OrderProduct(op));
+                                 select new OrderProduct(op)).ToList();
                 }
                 return _products.ToList();
             }
@@ -51,12 +58,18 @@ namespace SmartNerd
         }
         public void AddProduct(Models.Menu.Product prod)
         {
-            _context.OrderProducts.InsertOnSubmit(new DataModels.OrderProduct
+            DataModels.OrderProduct op = new DataModels.OrderProduct
             {
                 Quantity = prod.Quantity,
                 ProductID = prod.ProductID,
                 OrderID = _order.OrderID
-            });
+            };
+            _context.OrderProducts.InsertOnSubmit(op);
+            OrderProduct orderProd = new OrderProduct(op);
+            orderProd.Price = (from p in _context.Products
+                               where p.ProductID == prod.ProductID
+                               select p.Price).First();
+            Products.Add(orderProd);
         }
         public void Save()
         {
