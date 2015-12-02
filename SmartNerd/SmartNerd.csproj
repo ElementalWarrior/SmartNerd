@@ -174,6 +174,9 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MenuViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmartNerd.cs">
+      <DependentUpon>SmartNerd.dbml</DependentUpon>
+    </Compile>
     <Compile Include="SmartNerd.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

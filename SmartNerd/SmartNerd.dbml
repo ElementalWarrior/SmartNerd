@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db_jmcdonne" EntityNamespace="DataModels" Class="SmartNerdDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=sql04.ok.ubc.ca;Initial Catalog=db_jmcdonne;Persist Security Info=True;User ID=jmcdonne;TrustServerCertificate=True;Authentication=&quot;Sql Password&quot;" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="db_jmcdonneConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=sql04.ok.ubc.ca;Initial Catalog=db_jmcdonne;Persist Security Info=True;User ID=jmcdonne;TrustServerCertificate=True;Authentication=&quot;Sql Password&quot;" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
   <Table Name="jmcdonne.Category" Member="Categories">
     <Type Name="Category">
       <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
