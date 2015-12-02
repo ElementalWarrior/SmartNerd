@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SmartNerd.Models
@@ -77,24 +78,27 @@ namespace SmartNerd.Models
         public string Phone { get; set; }
     }
 
-    public class Account
-    {
-        public string UserName { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-
-        public List<Address> BillingAddresses { get; set; }
-        public List<Address> MailingAddresses { get; set; }
-    }
     public class Address
     {
+        public int AddressID { get; set; }
+        [Display(Name="Full Name")]
+        public String FullName { get; set; }
+        [Display(Name = "Address Line 1")]
         public string Line1 { get; set; }
-        public string Line2 { get; set;}
+        [Display(Name = "Address Line 2")]
+        public string Line2 { get; set; }
+        [Display(Name = "City")]
         public string City { get; set; }
+        [Display(Name = "State")]
         public string StateOrProvince { get; set; }
+        [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
+        [Display(Name = "County")]
         public string County { get; set; }
+    }
+    public class AccountAddress : Address
+    {
+        public Guid AccountID { get; set; }
+        public string AddressType { get; set; }
     }
 }

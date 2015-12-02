@@ -22,19 +22,8 @@
       <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Order_OrderProduct" Member="Order" ThisKey="OrderID" OtherKey="OrderID" Type="Order" IsForeignKey="true" />
       <Association Name="Product_OrderProduct" Member="Product" ThisKey="ProductID" OtherKey="ProductID" Type="Product" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="jmcdonne.Orders" Member="Orders">
-    <Type Name="Order">
-      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="AccountID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="true" />
-      <Column Name="CartID" AutoSync="OnInsert" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="OrderTotal" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Column Name="DateCreated" AutoSync="OnInsert" Type="System.DateTime" DbType="DateTime NOT NULL" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="DatePlaced" AutoSync="Never" Type="System.DateTime" DbType="DateTime" IsDbGenerated="true" CanBeNull="true" />
-      <Association Name="Order_OrderProduct" Member="OrderProducts" ThisKey="OrderID" OtherKey="OrderID" Type="OrderProduct" />
+      <Association Name="Order_OrderProduct" Member="Order" ThisKey="OrderID" OtherKey="OrderID" Type="Order" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="jmcdonne.Product" Member="Products">
@@ -46,6 +35,42 @@
       <Column Name="DateCreated" AutoSync="OnInsert" Type="System.DateTime" DbType="DateTime NOT NULL" IsDbGenerated="true" CanBeNull="false" />
       <Association Name="Product_CategoryEntry" Member="CategoryEntries" ThisKey="ProductID" OtherKey="ProductID" Type="CategoryEntry" />
       <Association Name="Product_OrderProduct" Member="OrderProducts" ThisKey="ProductID" OtherKey="ProductID" Type="OrderProduct" />
+    </Type>
+  </Table>
+  <Table Name="jmcdonne.AccountAddress" Member="AccountAddresses">
+    <Type Name="AccountAddress">
+      <Column Name="AccountAddressID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AddressID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressType" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Address_AccountAddress" Member="Address" ThisKey="AddressID" OtherKey="AddressID" Type="Address" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="jmcdonne.Address" Member="Addresses">
+    <Type Name="Address">
+      <Column Name="AddressID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Line1" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Line2" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="StateOrProvince" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="ZipCode" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="County" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Address_AccountAddress" Member="AccountAddresses" ThisKey="AddressID" OtherKey="AddressID" Type="AccountAddress" />
+      <Association Name="Address_Order" Member="Orders" ThisKey="AddressID" OtherKey="AddressID" Type="Order" />
+    </Type>
+  </Table>
+  <Table Name="jmcdonne.Orders" Member="Orders">
+    <Type Name="Order">
+      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CartID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="OrderTotal" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" AutoSync="OnInsert" Type="System.DateTime" DbType="DateTime NOT NULL" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DatePlaced" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AccountID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="AddressID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Order_OrderProduct" Member="OrderProducts" ThisKey="OrderID" OtherKey="OrderID" Type="OrderProduct" />
+      <Association Name="Address_Order" Member="Address" ThisKey="AddressID" OtherKey="AddressID" Type="Address" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

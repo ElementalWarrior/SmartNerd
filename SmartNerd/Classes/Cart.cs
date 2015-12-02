@@ -50,6 +50,24 @@ namespace SmartNerd
                 _order.AccountID = value;
             }
         }
+        public decimal Total
+        {
+            get
+            {
+                return _order.OrderTotal;
+            }
+        }
+        public int? AddressID
+        {
+            get
+            {
+                return _order.AddressID;
+            }
+            set
+            {
+                _order.AddressID = value;
+            }
+        }
         #endregion
 
         #region "Public Methods"
@@ -69,18 +87,33 @@ namespace SmartNerd
         }
         public void AddProduct(Models.Menu.Product prod)
         {
-            DataModels.OrderProduct op = new DataModels.OrderProduct
+            OrderProduct classOp = Products.FirstOrDefault(p => p.ProductID == prod.ProductID);
+            if (classOp == null)
             {
-                Quantity = prod.Quantity,
-                ProductID = prod.ProductID,
-                OrderID = _order.OrderID
-            };
-            _context.OrderProducts.InsertOnSubmit(op);
-            OrderProduct orderProd = new OrderProduct(op);
-            orderProd.Price = (from p in _context.Products
-                               where p.ProductID == prod.ProductID
-                               select p.Price).First();
-            Products.Add(orderProd);
+                DataModels.OrderProduct op = new DataModels.OrderProduct
+                {
+                    Quantity = prod.Quantity,
+                    ProductID = prod.ProductID,
+                    OrderID = _order.OrderID
+                };
+                _context.OrderProducts.InsertOnSubmit(op);
+                OrderProduct orderProd = new OrderProduct(op);
+                orderProd.Price = (from p in _context.Products
+                                   where p.ProductID == prod.ProductID
+                                   select p.Price).First();
+                Products.Add(orderProd);
+            }
+            else
+            {
+                classOp.Quantity++;
+            }
+        }
+        public void RemoveProduct(int productID)
+        {
+            List<DataModels.OrderProduct> ops = (from op in _context.OrderProducts
+                                                 where op.ProductID == productID
+                                                 select op).ToList();
+            _context.OrderProducts.DeleteAllOnSubmit(ops);
         }
         public void Save()
         {

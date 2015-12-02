@@ -59,3 +59,13 @@ input[type="checkbox"].input-validation-error {
 {
     clear: both;
 }
+#newAddress
+{
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 0 15px 15px 15px;
+}
+.table-address td:first-child
+{
+    padding-right: 10px;
+}

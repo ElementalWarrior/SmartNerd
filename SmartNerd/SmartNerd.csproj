@@ -242,6 +242,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Cart\Checkout.cshtml" />
+    <Content Include="Views\Cart\Address.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

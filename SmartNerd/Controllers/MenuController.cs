@@ -102,7 +102,13 @@ namespace SmartNerd.Controllers
                 Cart.AddProduct(prod);
                 Cart.Save();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Menu");
+        }
+
+        public ActionResult RemoveProduct(int productID, string returnUrl)
+        {
+            Cart.RemoveProduct(productID);
+            return Redirect(returnUrl);
         }
 	}
 }

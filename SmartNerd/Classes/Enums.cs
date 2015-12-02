@@ -7,7 +7,7 @@ namespace SmartNerd.Enums
 {
     public enum AccountAddressType
     {
-        Billing = "Billing",
-        Mailing = "Mailing"
+        //Billing = "Billing",
+        //Mailing = "Mailing"
     }
 }

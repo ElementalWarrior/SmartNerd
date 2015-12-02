@@ -16,6 +16,7 @@ drop table Address;
 create table Address
 (
 	AddressID int primary key,
+	FullName varchar(100) not null,
 	Line1 varchar(100) not null,
 	Line2 varchar(100),
 	City varchar(50) not null,
@@ -36,11 +37,13 @@ create table AccountAddress
 create table Orders
 (
 	OrderID int primary key identity(1,1),
-	AccountID uniqueidentifier,
+	AccountID int not null,
 	CartID uniqueidentifier default newid() not null,
-	OrderTotal decimal,
+	OrderTotal decimal not null,
 	DateCreated datetime not null default getdate(),
-	DatePlaced datetime
+	DatePlaced datetime,
+	AddressID int,
+	foreign key (AddressID) references Address(AddressID),
 );
 
 --create table DeliveryOrder
