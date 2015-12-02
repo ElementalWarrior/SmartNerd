@@ -46,7 +46,7 @@ namespace SmartNerd
     #endregion
 		
 		public SmartNerdDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["db_jmcdonneConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
