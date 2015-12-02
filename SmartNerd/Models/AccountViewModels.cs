@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SmartNerd.Models
 {
@@ -74,5 +75,26 @@ namespace SmartNerd.Models
 
         [Display(Name = "Phone Number")]
         public string Phone { get; set; }
+    }
+
+    public class Account
+    {
+        public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+
+        public List<Address> BillingAddresses { get; set; }
+        public List<Address> MailingAddresses { get; set; }
+    }
+    public class Address
+    {
+        public string Line1 { get; set; }
+        public string Line2 { get; set;}
+        public string City { get; set; }
+        public string StateOrProvince { get; set; }
+        public string ZipCode { get; set; }
+        public string County { get; set; }
     }
 }
