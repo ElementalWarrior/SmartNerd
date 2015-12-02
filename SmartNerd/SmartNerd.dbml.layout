@@ -27,7 +27,7 @@
         <classShapeMoniker Id="d626e255-57aa-4dba-8daf-1e200e1eaf46" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 4.53689747265625); (6.03125 : 4.53689747265625); (6.03125 : 4.1362939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 4.41189747265625); (5.9375 : 4.41189747265625); (5.9375 : 4.1362939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/SmartNerdDataContext/Product/Product_CategoryEntry" />
       <nodes>
         <classShapeMoniker Id="82a9f66a-cfe3-4ba1-b542-659063a0f5aa" />
