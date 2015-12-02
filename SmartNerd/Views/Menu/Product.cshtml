@@ -1,0 +1,15 @@
+﻿@model SmartNerd.Models.Menu.Product
+@{
+    ViewBag.Title = Model.ProductName;
+}
+@using(Html.BeginForm("Product", "Menu", FormMethod.Post))
+{ 
+    <h2>@Model.ProductName</h2>
+
+    <img src="#" alt="@Model.ProductName"/>
+
+    @Model.Description
+
+    @Model.Price
+
+}

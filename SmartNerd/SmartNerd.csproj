@@ -162,6 +162,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Classes\Cart.cs" />
     <Compile Include="Classes\OrderProduct.cs" />
+    <Compile Include="Classes\Util.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -189,6 +190,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\p\1.png" />
+    <Content Include="Images\p\2.png" />
+    <Content Include="Images\p\3.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -230,6 +234,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Menu\Search.cshtml" />
+    <Content Include="Views\Menu\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
