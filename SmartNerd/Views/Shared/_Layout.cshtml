@@ -20,11 +20,14 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Browse", "Index", "Menu")</li>
-                    <li>@Html.ActionLink("Search", "Search", "Menu")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Home","Index","Home")</li>
+                    <li>@Html.ActionLink("Browse","Index","Menu")</li>
+                    <li>@Html.ActionLink("Search","Search","Menu")</li>
+                    @if(User.IsInRole("Administrator")) {
+                        <li>@Html.ActionLink("Manage","Index","Admin")</li>
+                    }
+                    <li>@Html.ActionLink("About","About","Home")</li>
+                    <li>@Html.ActionLink("Contact","Contact","Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -40,6 +43,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts",required: false)
 </body>
 </html>
