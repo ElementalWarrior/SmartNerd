@@ -12,27 +12,7 @@ drop table DeliveryOrder;
 drop table Orders;
 drop table AccountAddress;
 drop table Address;
-drop table AccountPermission;
-drop table Account;
 
-create table Account
-(	
-	AccountID int primary key,
-	FirstName varchar(50),
-	LastName varchar(50),
-	Email varchar(250) not null,
-	Phone varchar(20),
-	Password varchar(40),
-	DateCreated datetime,
-	constraint uc_Email unique (Email)
-);
---create table AccountPermission
---(
---	AccountPermissionID int primary key,
---	AccountID int not null,
---	Name varchar(50) not null,
---	foreign key (AccountID) references Account(AccountID)
---);
 create table Address
 (
 	AddressID int primary key,
@@ -47,10 +27,10 @@ create table AccountAddress
 (
 	AccountAddressID int primary key,
 	AddressID int not null,
-	AccountID int not null,
+	UserID nvarchar(128) not null,
 	AddressType varchar(20) not null,
 	foreign key (AddressID) references Address(AddressID),
-	foreign key (AccountID) references Account(AccountID),
+	foreign key (UserID) references AspNetUsers(Id),
 	constraint chk_AddressType check (addresstype in ('Mailing', 'Billing'))
 );
 create table Orders
@@ -71,13 +51,13 @@ create table Orders
 --	foreign key (OrderID) references Orders(OrderID),
 --	foreign key (AccountAddressID) references AccountAddress(AccountAddressID)
 --);
---create table PhysicalLocation
---(
---	PhysicalLocationID int primary key,
---	Name varchar(50) not null,
---	LocationType varchar(20) not null,
---	constraint chk_LocationType check (locationtype in ('Store', 'Warehouse'))
---);
+create table PhysicalLocation
+(
+	PhysicalLocationID int primary key,
+	Name varchar(50) not null,
+	LocationType varchar(20) not null,
+	constraint chk_LocationType check (locationtype in ('Store', 'Warehouse'))
+);
 --create table PickupOrder
 --(
 --	PickupOrderID int primary key,
@@ -94,15 +74,15 @@ create table Product
 	Price decimal not null,
 	DateCreated datetime not null default getdate()
 );
---create table Inventory
---(
---	InventoryID int primary key,
---	PhysicalLocationID int not null,
---	ProductID int not null,
---	Count int not null,
---	foreign key (PhysicalLocationID) references PhysicalLocation(PhysicalLocationID),
---	foreign key (ProductID) references Product(ProductID)
---);
+create table Inventory
+(
+	InventoryID int primary key,
+	PhysicalLocationID int not null,
+	ProductID int not null,
+	Count int not null,
+	foreign key (PhysicalLocationID) references PhysicalLocation(PhysicalLocationID),
+	foreign key (ProductID) references Product(ProductID)
+);
 create table OrderProduct
 (
 	OrderProductID int primary key,
