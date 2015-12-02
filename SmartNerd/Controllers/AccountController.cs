@@ -76,17 +76,30 @@ namespace SmartNerd.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            ApplicationDbContext context = new ApplicationDbContext();
+            if(context.Roles.SingleOrDefault(a => a.Name == "Administrator") == null) {
+                context.Roles.Add(new IdentityRole()
+                    {
+                        Name = "Administrator"
+                    });
+
+                await context.SaveChangesAsync();
+            }
+
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() {
                     UserName = model.UserName,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    Email = model.Email
+                    Email = model.Email,
+                    Phone = model.Phone
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    if(user.UserName == "admin") await UserManager.AddToRoleAsync(user.Id,"Administrator");
                     await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }

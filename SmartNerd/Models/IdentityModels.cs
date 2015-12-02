@@ -7,11 +7,12 @@ namespace SmartNerd.Models
     public class ApplicationUser : IdentityUser
     {
         [Required]
-        public virtual string FirstName { get; set; }
+        public string FirstName { get; set; }
         [Required]
-        public virtual string LastName { get; set; }
+        public string LastName { get; set; }
         [Required]
-        public virtual string Email { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; } 
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
