@@ -178,11 +178,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MenuViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SmartNerd.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SmartNerd.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -230,11 +225,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
-    <Content Include="SmartNerd.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>SmartNerd.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Views\Menu\Search.cshtml" />
     <Content Include="Views\Menu\Product.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
@@ -254,11 +244,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="SmartNerd.dbml.layout">
-      <DependentUpon>SmartNerd.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
