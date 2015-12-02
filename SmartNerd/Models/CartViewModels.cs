@@ -5,4 +5,8 @@ using System.Web;
 
 namespace SmartNerd.Models.CartViewModels
 {
+    public class Cart
+    {
+        //public 
+    }
 }

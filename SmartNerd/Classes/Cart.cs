@@ -39,6 +39,17 @@ namespace SmartNerd
                 return _order.CartID;
             }
         }
+        public Guid? AccountID
+        {
+            get
+            {
+                return _order.AccountID;
+            }
+            set
+            {
+                _order.AccountID = value;
+            }
+        }
         #endregion
 
         #region "Public Methods"

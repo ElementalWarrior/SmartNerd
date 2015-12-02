@@ -49,6 +49,8 @@ namespace SmartNerd.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
+                    Cart.AccountID = Guid.Parse(user.Id);
+                    Cart.Save();
                     return RedirectToLocal(returnUrl);
                 }
                 else
@@ -101,6 +103,8 @@ namespace SmartNerd.Controllers
                 {
                     if(user.UserName == "admin") await UserManager.AddToRoleAsync(user.Id,"Administrator");
                     await SignInAsync(user, isPersistent: false);
+                    Cart.AccountID = Guid.Parse(user.Id);
+                    Cart.Save();
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -186,6 +190,8 @@ namespace SmartNerd.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
+            Cart.AccountID = null;
+            Cart.Save();
             return RedirectToAction("Index", "Home");
         }
 

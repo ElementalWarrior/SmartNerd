@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace SmartNerd.Controllers
 {
@@ -18,6 +19,11 @@ namespace SmartNerd.Controllers
                     if(Session["CartID"] == null)
                     {
                         _cart = new Cart();
+                        String accountID = User.Identity.GetUserId();
+                        if (accountID != null && Guid.Parse(accountID) != Guid.Empty)
+                        {
+                            _cart.AccountID = Guid.Parse(accountID);
+                        }
                     }
                     else
                     {

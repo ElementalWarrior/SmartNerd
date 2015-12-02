@@ -12,6 +12,11 @@ namespace SmartNerd.Controllers
         // GET: /Cart/
         public ActionResult Index()
         {
+            return RedirectToAction("Checkout", "Cart");
+        }
+
+        public ActionResult Checkout()
+        {
             return View();
         }
 	}

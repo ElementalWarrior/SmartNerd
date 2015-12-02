@@ -654,7 +654,7 @@ namespace DataModels
 		
 		private int _OrderID;
 		
-		private int _AccountID;
+		private System.Nullable<System.Guid> _AccountID;
 		
 		private System.Guid _CartID;
 		
@@ -672,7 +672,7 @@ namespace DataModels
     partial void OnCreated();
     partial void OnOrderIDChanging(int value);
     partial void OnOrderIDChanged();
-    partial void OnAccountIDChanging(int value);
+    partial void OnAccountIDChanging(System.Nullable<System.Guid> value);
     partial void OnAccountIDChanged();
     partial void OnCartIDChanging(System.Guid value);
     partial void OnCartIDChanged();
@@ -710,8 +710,8 @@ namespace DataModels
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountID", DbType="Int NOT NULL")]
-		public int AccountID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountID", DbType="UniqueIdentifier NOT NULL")]
+		public System.Nullable<System.Guid> AccountID
 		{
 			get
 			{

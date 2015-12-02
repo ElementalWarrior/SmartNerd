@@ -41,6 +41,7 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Smart Nerd</p>
+            @Newtonsoft.Json.JsonConvert.SerializeObject(((SmartNerd.Controllers.BaseController)this.ViewContext.Controller).Cart)
         </footer>
     </div>
 
