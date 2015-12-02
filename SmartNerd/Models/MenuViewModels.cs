@@ -22,4 +22,9 @@ namespace SmartNerd.Models.Menu
         public List<Category> Categories { get; set; }
         public List<Product> Products { get; set; }
     }
+
+    public class SearchPage {
+        public List<Product> Products { get; set; }
+        public String SearchTerm { get; set; }
+    }
 }

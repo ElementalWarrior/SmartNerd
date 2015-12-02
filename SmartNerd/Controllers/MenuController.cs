@@ -50,5 +50,25 @@ namespace SmartNerd.Controllers
             };
             return View(mp);
         }
+
+        public ActionResult Search(Models.Menu.SearchPage model) {
+            SmartNerdDataContext dc = new SmartNerdDataContext();
+
+            List<Product> products = null;
+
+            if(model.SearchTerm != null) {
+                products = (from a in dc.Products
+                            where a.Name.Contains(model.SearchTerm)
+                            select new Product {
+                                Description = a.Description,
+                                Price = a.Price,
+                                ProductID = a.ProductID,
+                                ProductName = a.Name }).ToList();
+            }
+
+            model.Products = products;
+
+            return View(model);
+        }
 	}
 }
