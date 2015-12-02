@@ -40,3 +40,22 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+#productPageImg
+{
+    float: left;
+    max-width: 300px;
+    vertical-align: top;
+}
+#productDetails
+{
+    margin-left: 300px;
+    vertical-align: top;
+}
+#productEditQty
+{
+    width: 40px;
+}
+.clear
+{
+    clear: both;
+}

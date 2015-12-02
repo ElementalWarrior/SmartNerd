@@ -2,14 +2,23 @@
 @{
     ViewBag.Title = Model.ProductName;
 }
-@using(Html.BeginForm("Product", "Menu", FormMethod.Post))
-{ 
-    <h2>@Model.ProductName</h2>
+<div id="productPage">
+    @using (Html.BeginForm("Product", "Menu", FormMethod.Post))
+    {
+        
+        <img id="productPageImg" src="@SmartNerd.Classes.Util.ProductUrl(Model.ProductID)" alt="@Model.ProductName" />
 
-    <img src="#" alt="@Model.ProductName"/>
+        <div id="productDetails">
+            <h2>@Model.ProductName</h2>
 
-    @Model.Description
+            @Html.Raw(Model.Description)
+            <br /><br/>
+            $@Model.Price
 
-    @Model.Price
-
-}
+            <br/><br/>
+            Qty: @Html.TextBoxFor(m => m.Quantity, new { id = "productEditQty"})
+            <input type="submit" value="Add to Cart" />
+        </div>
+    }
+    <div class="clear"></div>
+</div>

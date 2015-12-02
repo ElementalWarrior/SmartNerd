@@ -82,10 +82,22 @@ namespace SmartNerd.Controllers
                                             ProductID = p.ProductID,
                                             Price = p.Price,
                                             ProductName = p.Name,
-                                            Description = p.Description
+                                            Description = p.Description,
+                                            Quantity = 1
                                         }).First();
 
             return View(prod);
+        }
+
+        [HttpPost]
+        public ActionResult Product(Product prod)
+        {
+            if(ModelState.IsValid)
+            {
+                Cart.AddProduct(prod);
+                Cart.Save();
+            }
+            return RedirectToAction("Index", "Home");
         }
 	}
 }
