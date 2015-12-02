@@ -1,0 +1,32 @@
+﻿@model SmartNerd.Models.Admin.SearchPage
+
+<style>
+    #menuListing img {
+        background: #f00;
+        display: block;
+        height: 150px;
+    }
+
+    #menuListing a {
+        display: block;
+    }
+
+    #menuListing div {
+        padding-bottom: 15px;
+        padding-top: 15px;
+    }
+</style>
+
+@using(Html.BeginForm("Search","Menu",new { ReturnUrl = ViewBag.ReturnUrl },FormMethod.Get,new { @class = "form-horizontal",role = "form" })) {
+    @Html.TextBoxFor(a => a.SearchTerm,new { @class = "form-control" });
+}
+
+@if(Model.Products == null) {
+    <p>Your query did not return any results</p>
+} else {
+    <div id="menuListing" class="row">
+        @foreach(var prod in Model.Products) {
+            <div class="col-sm-4 col-md-3"><a href="@Url.Action("Product", "Menu", new { productID = prod.ProductID })"><img src="#" /><span>@prod.ProductName</span></a></div>
+        }
+    </div>
+}
