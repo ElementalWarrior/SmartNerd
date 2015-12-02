@@ -39,7 +39,7 @@ create table Orders
 	AccountID int not null,
 	CartID uniqueidentifier default newid() not null,
 	OrderTotal decimal,
-	DateCreated datetime not null,
+	DateCreated datetime not null default getdate(),
 	DatePlaced datetime
 );
 

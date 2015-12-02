@@ -10,6 +10,7 @@
 
         <div id="productDetails">
             <h2>@Model.ProductName</h2>
+            @Html.HiddenFor(m => m.ProductID)
 
             @Html.Raw(Model.Description)
             <br /><br/>

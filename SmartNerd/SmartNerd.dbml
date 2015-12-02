@@ -42,9 +42,9 @@
       <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="AccountID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="OrderTotal" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" AutoSync="Never" Type="System.DateTime" DbType="DateTime NOT NULL" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="DatePlaced" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CartID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="false" />
+      <Column Name="CartID" AutoSync="Never" Type="System.Guid" DbType="UniqueIdentifier" IsDbGenerated="true" CanBeNull="false" />
       <Association Name="Order_OrderProduct" Member="OrderProducts" ThisKey="OrderID" OtherKey="OrderID" Type="OrderProduct" />
     </Type>
   </Table>
