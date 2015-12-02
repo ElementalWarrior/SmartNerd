@@ -38,14 +38,15 @@ namespace SmartNerd.Controllers
             };
             return View(c);
         }
-        public ActionResult Address()
+        private Models.CartViewModels.AddressPage BuildAddressPage()
         {
+
             SmartNerdDataContext _context = new SmartNerdDataContext();
 
             Models.CartViewModels.AddressPage add = new Models.CartViewModels.AddressPage
             {
-                BillingAddresses = new List<Address>(),
-                MailingAddresses = new List<Address>(),
+                BillingAddresses = new List<Models.Address>(),
+                MailingAddresses = new List<Models.Address>(),
             };
             if (User.Identity.GetUserId() != null)
             {
@@ -66,14 +67,14 @@ namespace SmartNerd.Controllers
                                                              AddressType = aa.AddressType,
                                                              AccountID = new Guid(aa.UserID)
                                                          }).ToList();
-                add.BillingAddresses = addresses.Where(m => m.AddressType == "Billing").Select(m => (Address)m).ToList();
-                add.MailingAddresses = addresses.Where(m => m.AddressType == "Mailing").Select(m => (Address)m).ToList();
+                add.BillingAddresses = addresses.Where(m => m.AddressType == "Billing").Select(m => (Models.Address)m).ToList();
+                add.MailingAddresses = addresses.Where(m => m.AddressType == "Mailing").Select(m => (Models.Address)m).ToList();
             }
             if (Cart.AddressID != null)
             {
                 add.CartAddress = (from a in _context.Addresses
                                    where a.AddressID == Cart.AddressID
-                                   select new Address
+                                   select new Models.Address
                                    {
                                        FullName = a.FullName,
                                        City = a.City,
@@ -84,7 +85,35 @@ namespace SmartNerd.Controllers
                                        ZipCode = a.ZipCode
                                    }).FirstOrDefault();
             }
+            return add;
+        }
+        public ActionResult Address()
+        {
+            Models.CartViewModels.AddressPage add = BuildAddressPage();
             return View(add);
+        }
+        [HttpPost]
+        public ActionResult Address(Models.CartViewModels.AddressPage model)
+        {
+            if(model.AddressToUse != -1)
+            {
+                Cart.AddressID = model.AddressToUse;
+            }
+            else
+            {
+                Cart.UseNewAddress(new Address
+                {
+                    City = model.CartAddress.City,
+                    Line1 = model.CartAddress.Line1,
+                    Line2 = model.CartAddress.Line2,
+                    StateOrProvince = model.CartAddress.StateOrProvince,
+                    ZipCode = model.CartAddress.ZipCode,
+                    County = model.CartAddress.County,
+                    FullName = model.CartAddress.FullName
+                });
+            }
+            Cart.Save();
+            return View(BuildAddressPage());
         }
 	}
 }

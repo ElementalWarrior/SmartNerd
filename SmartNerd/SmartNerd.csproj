@@ -160,6 +160,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Classes\Address.cs" />
     <Compile Include="Classes\Cart.cs" />
     <Compile Include="Classes\Enums.cs" />
     <Compile Include="Classes\OrderProduct.cs" />

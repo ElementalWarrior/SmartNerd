@@ -15,7 +15,7 @@ drop table Address;
 
 create table Address
 (
-	AddressID int primary key,
+	AddressID int primary key identity(1,1),
 	FullName varchar(100) not null,
 	Line1 varchar(100) not null,
 	Line2 varchar(100),
@@ -26,7 +26,7 @@ create table Address
 );
 create table AccountAddress
 (
-	AccountAddressID int primary key,
+	AccountAddressID int primary key identity(1,1),
 	AddressID int not null,
 	UserID nvarchar(128) not null,
 	AddressType varchar(20) not null,
@@ -37,7 +37,7 @@ create table AccountAddress
 create table Orders
 (
 	OrderID int primary key identity(1,1),
-	AccountID int not null,
+	AccountID uniqueidentifier not null,
 	CartID uniqueidentifier default newid() not null,
 	OrderTotal decimal not null,
 	DateCreated datetime not null default getdate(),
@@ -56,7 +56,7 @@ create table Orders
 --);
 create table PhysicalLocation
 (
-	PhysicalLocationID int primary key,
+	PhysicalLocationID int primary key identity(1,1),
 	Name varchar(50) not null,
 	LocationType varchar(20) not null,
 	constraint chk_LocationType check (locationtype in ('Store', 'Warehouse'))
@@ -71,7 +71,7 @@ create table PhysicalLocation
 --);
 create table Product
 (
-	ProductID int primary key,
+	ProductID int primary key identity(1,1),
 	Name varchar(50) not null,
 	Description text,
 	Price decimal not null,
@@ -79,7 +79,7 @@ create table Product
 );
 create table Inventory
 (
-	InventoryID int primary key,
+	InventoryID int primary key identity(1,1),
 	PhysicalLocationID int not null,
 	ProductID int not null,
 	Count int not null,
@@ -97,12 +97,12 @@ create table OrderProduct
 );
 create table Category
 (
-	CategoryID int primary key,
+	CategoryID int primary key identity(1,1),
 	Name varchar(50) not null
 );
 create table CategoryEntry
 (
-	CategoryEntryID int primary key,
+	CategoryEntryID int primary key identity(1,1),
 	CategoryID int not null,
 	ProductID int not null,
 	foreign key (CategoryID) references Category(CategoryID),

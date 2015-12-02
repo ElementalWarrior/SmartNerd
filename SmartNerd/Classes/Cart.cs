@@ -115,6 +115,23 @@ namespace SmartNerd
                                                  select op).ToList();
             _context.OrderProducts.DeleteAllOnSubmit(ops);
         }
+        public void UseNewAddress(Address newAddress)
+        {
+            SmartNerdDataContext _context2 = new SmartNerdDataContext();
+            DataModels.Address _newAddress = new DataModels.Address
+            {
+                FullName = newAddress.FullName,
+                City = newAddress.City,
+                Line1 = newAddress.Line1,
+                Line2 = newAddress.Line2,
+                County = newAddress.County,
+                StateOrProvince = newAddress.StateOrProvince,
+                ZipCode = newAddress.ZipCode,
+            };
+            _context2.Addresses.InsertOnSubmit(_newAddress);
+            _context2.SubmitChanges();
+            _order.AddressID = _newAddress.AddressID;
+        }
         public void Save()
         {
             decimal total = 0;
@@ -123,6 +140,8 @@ namespace SmartNerd
                 total += p.Price * p.Quantity;
             }
             _order.OrderTotal = total;
+
+
             _context.SubmitChanges();
         }
         #endregion

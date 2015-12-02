@@ -108,6 +108,7 @@ namespace SmartNerd.Controllers
         public ActionResult RemoveProduct(int productID, string returnUrl)
         {
             Cart.RemoveProduct(productID);
+            Cart.Save();
             return Redirect(returnUrl);
         }
 	}
