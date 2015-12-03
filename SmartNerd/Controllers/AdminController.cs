@@ -190,7 +190,41 @@ namespace SmartNerd.Controllers {
         }
 
         public ActionResult Recovery(Boolean? recover) {
-            if(recover.HasValue) ModelState.AddModelError("","Database recovered");
+            SmartNerdDataContext db = new SmartNerdDataContext();
+
+            if(recover.HasValue) {
+                ModelState.AddModelError("","System recovered");
+
+                FileInfo file = new FileInfo(Server.MapPath("~/Recovery/ddl.sql"));
+                string script = file.OpenText().ReadToEnd();
+                try {
+                    db.ExecuteCommand(script);
+                } catch {
+
+                }
+                try {
+                    db.ExecuteCommand(script);
+                } catch {
+
+                }
+
+                file = new FileInfo(Server.MapPath("~/Recovery/menu.sql"));
+                script = file.OpenText().ReadToEnd();
+                try {
+                    db.ExecuteCommand(script);
+                } catch {
+
+                }
+
+                Directory.Delete(Server.MapPath("~/Images/p"),true);
+
+                Directory.CreateDirectory(Server.MapPath("~/Images/p"));
+                foreach(String image in Directory.GetFiles(Server.MapPath("~/Recovery/p"))) {
+                    String fileName = Path.GetFileName(image);
+                    String destFile = Path.Combine(Server.MapPath("~/Images/p"),fileName);
+                    System.IO.File.Copy(image,destFile,true);
+                }
+            }
             return View(recover);
         }
     }
