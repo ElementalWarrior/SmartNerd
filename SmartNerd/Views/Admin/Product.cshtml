@@ -30,6 +30,7 @@
         Product Image: @using(Html.BeginForm("UploadImage","Admin",FormMethod.Post,new { enctype = "multipart/form-data" })) {
             @Html.HiddenFor(m => m.ProductID)
             <input type="file" name="file" />
+            <br/>
             <input type="submit" value="Upload" />
         }
 

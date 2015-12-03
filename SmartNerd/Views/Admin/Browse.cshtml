@@ -21,7 +21,7 @@
         <ol>
             @foreach(var cat in Model.Categories)
             {
-                <li><a href="@Url.Action("Index", "Menu", new {categoryID = cat.CategoryID})">@cat.CategoryName</a></li>
+                <li><a href="@Url.Action("Browse", "Admin", new {categoryID = cat.CategoryID})">@cat.CategoryName</a></li>
             }
         </ol>
     </div>
