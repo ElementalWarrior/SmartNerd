@@ -134,15 +134,17 @@ namespace SmartNerd
         }
         public void Save()
         {
-            decimal total = 0;
-            foreach(OrderProduct p in Products)
-            {
-                total += p.Price * p.Quantity;
+            if(_order.AccountID != null) {
+                decimal total = 0;
+                foreach(OrderProduct p in Products)
+                {
+                    total += p.Price * p.Quantity;
+                }
+                _order.OrderTotal = total;
+
+
+                _context.SubmitChanges();
             }
-            _order.OrderTotal = total;
-
-
-            _context.SubmitChanges();
         }
         #endregion
     }
