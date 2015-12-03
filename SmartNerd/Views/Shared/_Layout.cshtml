@@ -44,9 +44,9 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Smart Nerd</p>
-            @if(!User.IsInRole("Administrator")) {
+            @*@if(!User.IsInRole("Administrator")) {
                 @Newtonsoft.Json.JsonConvert.SerializeObject(((SmartNerd.Controllers.BaseController)this.ViewContext.Controller).Cart);
-            }
+            }*@
         </footer>
     </div>
 

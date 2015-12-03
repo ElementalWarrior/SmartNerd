@@ -41,9 +41,36 @@ namespace SmartNerd.Controllers
         [HttpPost]
         public ActionResult Checkout(Models.CartViewModels.CheckoutPage model)
         {
+            SmartNerdDataContext _context = new SmartNerdDataContext();
+
+            List<DataModels.Product> dataProducts = (from p in _context.Products
+                                                     where Cart.Products.Select(pr => pr.ProductID).Contains(p.ProductID)
+                                                     select p).ToList();
             foreach(var p in model.Products)
             {
+                DataModels.Product dataProduct = dataProducts.First(pr => pr.ProductID == p.ProductID);
                 Cart.Products.Where(prod => prod.ProductID == p.ProductID).ToList().ForEach(prod => prod.Quantity = p.Quantity);
+
+                if (dataProduct.Inventory - p.Quantity < 0)
+                {
+                    ModelState.AddModelError("", "There isn't sufficient inventory to place this order (" + dataProduct.Name + ": " + dataProduct.Inventory + ").");
+
+                    Models.CartViewModels.CheckoutPage c = new Models.CartViewModels.CheckoutPage
+                    {
+                        Products = (from op in Cart.Products
+                                    join pro in _context.Products on op.ProductID equals pro.ProductID
+                                    select new Models.Menu.Product
+                                    {
+                                        ProductID = pro.ProductID,
+                                        ProductName = pro.Name,
+                                        Quantity = op.Quantity,
+                                        Description = pro.Description,
+                                        Price = pro.Price
+                                    }).ToList(),
+                        Total = Cart.Total
+                    };
+                    return View(c);
+                }
             }
             Cart.Save();
             return RedirectToAction("Address", "Cart");
@@ -180,6 +207,22 @@ namespace SmartNerd.Controllers
                 if(Cart.OrderID == 0)
                 {
                     return RedirectToAction("Index", "Home");
+                }
+                SmartNerdDataContext _context = new SmartNerdDataContext();
+
+                List<DataModels.Product> dataProducts = (from p in _context.Products
+                                                         where Cart.Products.Select(pr => pr.ProductID).Contains(p.ProductID)
+                                                         select p).ToList();
+                foreach (var p in Cart.Products)
+                {
+                    DataModels.Product dataProduct = dataProducts.First(pr => pr.ProductID == p.ProductID);
+
+                    if (dataProduct.Inventory - p.Quantity < 0)
+                    {
+                        ModelState.AddModelError("", "There isn't sufficient inventory to place this order (" + dataProduct.Name + ": " + dataProduct.Inventory + ").");
+
+                        return View();
+                    }
                 }
                 Cart.SubmitOrder(new Payment
                 {

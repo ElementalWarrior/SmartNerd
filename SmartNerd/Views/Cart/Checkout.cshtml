@@ -5,6 +5,7 @@
 @using(Html.BeginForm("Checkout", "Cart", FormMethod.Post))
 { 
     <h2>Checkout</h2>
+    @Html.ValidationSummary()  
     if (Model.Products.Count > 0)
     {
     <table class="table table-striped table-bordered table-hover">
