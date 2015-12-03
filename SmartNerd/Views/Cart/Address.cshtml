@@ -65,11 +65,11 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.CartAddress.County, new { @class = "col-sm-3 control-label" })
-                @Html.TextBoxFor(m => m.CartAddress.County, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.CartAddress.County, new { @class = "form-control", maxlength = 2 })
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.CartAddress.StateOrProvince, new { @class = "col-sm-3 control-label" })
-                @Html.TextBoxFor(m => m.CartAddress.StateOrProvince, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.CartAddress.StateOrProvince, new { @class = "form-control", maxlength = 2 })
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.CartAddress.ZipCode, new { @class = "col-sm-3 control-label" })
