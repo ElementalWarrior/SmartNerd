@@ -77,5 +77,37 @@ namespace SmartNerd.Controllers
 
             return View(model);
         }
+
+        public ActionResult Product(int productID, int? categoryID = null)
+        {
+            SmartNerdDataContext _context = new SmartNerdDataContext();
+
+            Product prod = (from p in _context.Products
+                                        where p.ProductID == productID
+                                        select new Product
+                                        {
+                                            ProductID = p.ProductID,
+                                            Price = p.Price,
+                                            ProductName = p.Name,
+                                            Description = p.Description,
+                                            Inventory = 0
+                                        }).First();
+
+            return View(prod);
+        }
+
+        [HttpPost]
+        public ActionResult Product(Product model) {
+            SmartNerdDataContext db = new SmartNerdDataContext();
+
+            var prod = db.Products.Single(a=>a.ProductID==model.ProductID);
+            prod.Description = model.Description;
+            prod.Name = model.ProductName;
+            prod.Price = model.Price;
+
+            db.SubmitChanges();
+
+            return View(model);
+        }
     }
 }

@@ -30,7 +30,7 @@
     <h2>Index</h2>
     <div id="menuListing" class="row">
         @foreach(var prod in Model.Products) {
-            <div class="col-sm-4 col-md-3"><a href="@Url.Action("Product", "Menu", new { productID = prod.ProductID })"><img src="#" /><span>@prod.ProductName</span></a></div>
+            <div class="col-sm-4 col-md-3"><a href="@Url.Action("Product", "Admin", new { productID = prod.ProductID })"><img src="@SmartNerd.Classes.Util.ProductUrl(prod.ProductID)" /><span>@prod.ProductName</span></a></div>
         }
     </div>
 </div>

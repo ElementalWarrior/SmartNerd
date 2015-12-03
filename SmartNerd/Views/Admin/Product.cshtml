@@ -1,0 +1,30 @@
+﻿@model SmartNerd.Models.Admin.Product
+@{
+    ViewBag.Title = Model.ProductName;
+}
+<div id="productPage">
+    @using(Html.BeginForm("Product","Admin",FormMethod.Post)) {
+
+        <img id="productPageImg" src="@SmartNerd.Classes.Util.ProductUrl(Model.ProductID)" alt="@Model.ProductName" />
+
+        <div id="productDetails">
+            @Html.HiddenFor(m => m.ProductID)
+
+            <br /><br />
+            Name: @Html.TextBoxFor(m => m.ProductName,new { id = "productEditName" })
+
+            <br /><br />
+            Description: @Html.TextAreaFor(m => m.Description,new { id = "productEditDesc" })
+
+            <br /><br />
+            Price: $@Html.TextBoxFor(m => m.Price,new { id = "productEditPrice" })
+
+            <br /><br />
+            Inventory: @Html.TextBoxFor(m => m.Inventory,new { id = "productEditQty" })
+
+            <br/><br/>
+            <input type="submit" value="Save changes" />
+        </div>
+    }
+    <div class="clear"></div>
+</div>
