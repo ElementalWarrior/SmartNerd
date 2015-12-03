@@ -1,0 +1,14 @@
+﻿@model Boolean?
+
+@{
+    ViewBag.Title = "Recovery";
+}
+
+<br />
+<p>On this page you can restore the database to its initial configuration by clicking on "Recover".</p>
+<p>Note that this process will destroy all data and is irreversible.</p>
+@using(Html.BeginForm("Recovery","Admin",FormMethod.Get)) {
+    @Html.Hidden("Value",true);
+    <input type="submit" value="Recover" />
+}
+
