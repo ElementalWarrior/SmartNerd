@@ -72,14 +72,14 @@
         <elementListCompartment Id="5db45fd0-e336-48e4-8177-15c2e85ee464" absoluteBounds="1.3900000000000001, 7.9600000000000009, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.34375 : 7.5); (3.34375 : 6.51849609375); (4.125 : 6.51849609375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(3.34375 : 7.5); (3.34375 : 6.51849609375); (4.125 : 6.51849609375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/SmartNerdDataContext/Order/Order_OrderProduct" />
       <nodes>
         <classShapeMoniker Id="b1b00373-6b18-447f-b4a6-78161a3203e1" />
         <classShapeMoniker Id="7daa8917-8048-4469-9e70-f0b7fed8f2ec" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(7 : 9.52329752604167); (3.375 : 9.52329752604167)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(7 : 9.52329752604167); (3.375 : 9.52329752604167)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/SmartNerdDataContext/Address/Address_Order" />
       <nodes>
         <classShapeMoniker Id="979c94ae-4991-4d25-91ca-053caafdfc3c" />

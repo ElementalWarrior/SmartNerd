@@ -70,7 +70,8 @@ namespace SmartNerd.Controllers
                 add.BillingAddresses = addresses.Where(m => m.AddressType == "Billing").Select(m => (Models.Address)m).ToList();
                 add.MailingAddresses = addresses.Where(m => m.AddressType == "Mailing").Select(m => (Models.Address)m).ToList();
             }
-            if (Cart.AddressID != null)
+            Models.Address addressInList = add.MailingAddresses.FirstOrDefault(a => a.AddressID == Cart.AddressID);
+            if (Cart.AddressID != null && addressInList == null)
             {
                 add.CartAddress = (from a in _context.Addresses
                                    where a.AddressID == Cart.AddressID
@@ -111,9 +112,24 @@ namespace SmartNerd.Controllers
                     County = model.CartAddress.County,
                     FullName = model.CartAddress.FullName
                 });
+                if(model.SaveAddress)
+                {
+                    DataModels.AccountAddress aa = new DataModels.AccountAddress
+                    {
+                        UserID = User.Identity.GetUserId(),
+                        AddressID = Cart.AddressID.Value,
+                        AddressType = "Mailing"
+                    };
+                    SmartNerdDataContext _context = new SmartNerdDataContext();
+                    _context.AccountAddresses.InsertOnSubmit(aa);
+                    _context.SubmitChanges();
+                }
             }
             Cart.Save();
-            return View(BuildAddressPage());
+            Session["CartID"] = Cart.CartID;
+            Models.CartViewModels.AddressPage add = BuildAddressPage();
+            add.CartAddress = model.CartAddress;
+            return View(add);
         }
 	}
 }

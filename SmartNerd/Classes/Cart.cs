@@ -32,7 +32,7 @@ namespace SmartNerd
             }
             //we don't ever want to change this, so no set
         }
-        public Guid CartID
+        public Guid? CartID
         {
             get
             {

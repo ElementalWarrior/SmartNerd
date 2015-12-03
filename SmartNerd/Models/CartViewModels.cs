@@ -14,6 +14,7 @@ namespace SmartNerd.Models.CartViewModels
     public class AddressPage
     {
         public int AddressToUse { get; set; }
+        public Boolean SaveAddress { get; set; }
         public Address CartAddress { get; set; }
         public List<Address> BillingAddresses { get; set; }
         public List<Address> MailingAddresses { get; set; }

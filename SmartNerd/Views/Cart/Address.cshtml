@@ -5,43 +5,46 @@
 @using(Html.BeginForm("Address", "Cart", FormMethod.Post))
 {
 <h2>Address</h2>
+    <p>Please select an address to mail your order to.</p>
 
     for (int i = 0; i < Model.MailingAddresses.Count; i++)
     {
-        <table class="table-address">
-            <tr>
-                <td>@Html.LabelFor(m => m.MailingAddresses[i].FullName)</td>
-                <td>@Html.DisplayFor(m => m.MailingAddresses[i].FullName)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(m => m.MailingAddresses[i].Line1)</td>
-                <td>@Html.DisplayFor(m => m.MailingAddresses[i].Line1)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(m => m.MailingAddresses[i].Line2)</td>
-                <td>@Html.DisplayFor(m => m.MailingAddresses[i].Line2)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(m => m.MailingAddresses[i].City)</td>
-                <td>@Html.DisplayFor(m => m.MailingAddresses[i].City)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(m => m.MailingAddresses[i].County)</td>
-                <td>@Html.DisplayFor(m => m.MailingAddresses[i].County)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(m => m.MailingAddresses[i].StateOrProvince)</td>
-                <td>@Html.DisplayFor(m => m.MailingAddresses[i].StateOrProvince)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(m => m.MailingAddresses[i].ZipCode)</td>
-                <td>@Html.DisplayFor(m => m.MailingAddresses[i].ZipCode)</td>
-            </tr>
-        </table>
-    <button type="submit" name="AddressToUse" class="btn btn-primary" value="@Model.MailingAddresses[i].AddressID">Use this address</button>
+        <div class="divAddress">
+            <table class="table-address">
+                <tr>
+                    <td>@Html.LabelFor(m => m.MailingAddresses[i].FullName)</td>
+                    <td>@Html.DisplayFor(m => m.MailingAddresses[i].FullName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.MailingAddresses[i].Line1)</td>
+                    <td>@Html.DisplayFor(m => m.MailingAddresses[i].Line1)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.MailingAddresses[i].Line2)</td>
+                    <td>@Html.DisplayFor(m => m.MailingAddresses[i].Line2)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.MailingAddresses[i].City)</td>
+                    <td>@Html.DisplayFor(m => m.MailingAddresses[i].City)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.MailingAddresses[i].County)</td>
+                    <td>@Html.DisplayFor(m => m.MailingAddresses[i].County)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.MailingAddresses[i].StateOrProvince)</td>
+                    <td>@Html.DisplayFor(m => m.MailingAddresses[i].StateOrProvince)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(m => m.MailingAddresses[i].ZipCode)</td>
+                    <td>@Html.DisplayFor(m => m.MailingAddresses[i].ZipCode)</td>
+                </tr>
+            </table>
+            <button type="submit" name="AddressToUse" class="btn btn-primary" value="@Model.MailingAddresses[i].AddressID">Use this address</button>
+        </div>
     }
 
-        <div class="form-horizontal" id="newAddress">
+        <div class="" id="newAddress">
             <h3>New Address</h3>
             <div class="form-group">
                 @Html.LabelFor(m => m.CartAddress.FullName, new { @class = "col-sm-3 control-label"})
@@ -71,8 +74,14 @@
                 @Html.LabelFor(m => m.CartAddress.ZipCode, new { @class = "col-sm-3 control-label" })
                 @Html.TextBoxFor(m => m.CartAddress.ZipCode, new { @class = "form-control" })
             </div>
-            <div class="form-group">
-
+            <div class="form-group text-right">
+                <div id="saveAddress">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.CheckBoxFor(m => m.SaveAddress);
+                        <text>Save this address to your account?</text>
+                    }
+                </div>
                 <button type="submit" name="AddressToUse" value="-1" class="btn btn-primary">Ship to this address</button>
             </div>
         </div>

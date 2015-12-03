@@ -39,7 +39,7 @@
   </Table>
   <Table Name="jmcdonne.AccountAddress" Member="AccountAddresses">
     <Type Name="AccountAddress">
-      <Column Name="AccountAddressID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AccountAddressID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="AddressID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="UserID" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="AddressType" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />

@@ -61,11 +61,28 @@ input[type="checkbox"].input-validation-error {
 }
 #newAddress
 {
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
     border-radius: 10px;
     padding: 0 15px 15px 15px;
+}
+.divAddress .btn
+{
+    margin-top: 15px;
+}
+.divAddress
+{
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 15px;
+    width: 250px;
 }
 .table-address td:first-child
 {
     padding-right: 10px;
+}
+#saveAddress
+{
+    margin-bottom: 10px;
 }
