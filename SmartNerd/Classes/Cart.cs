@@ -133,6 +133,29 @@ namespace SmartNerd
             _context2.SubmitChanges();
             _order.AddressID = _newAddress.AddressID;
         }
+        public void SubmitOrder(Payment payment)
+        {
+            List<DataModels.Product> prods = (from p in _context.Products
+                                              where Products.Select(pr => pr.ProductID).Contains(p.ProductID)
+                                              select p).ToList();
+            foreach(var p in prods)
+            {
+                p.Inventory -= Products.First(pr => pr.ProductID == p.ProductID).Quantity;
+            }
+
+            DataModels.Payment dataPayment = new DataModels.Payment
+            {
+                Amount = Total,
+                CardType = payment.CardType,
+                FourDigits = payment.CardNumber.Substring(payment.CardNumber.Length - 4, 4),
+                OrderID = _order.OrderID,
+                PayPalID = payment.PayPalID
+            };
+            _context.Payments.InsertOnSubmit(dataPayment);
+            _order.DatePlaced = DateTime.Now;
+
+            Save();
+        }
         public void Save()
         {
 

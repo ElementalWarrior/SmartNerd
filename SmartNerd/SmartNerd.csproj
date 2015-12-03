@@ -164,6 +164,7 @@
     <Compile Include="Classes\Cart.cs" />
     <Compile Include="Classes\Enums.cs" />
     <Compile Include="Classes\OrderProduct.cs" />
+    <Compile Include="Classes\Payment.cs" />
     <Compile Include="Classes\Util.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -246,6 +247,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Cart\Pay.cshtml" />
+    <Content Include="Views\Cart\ThankYou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

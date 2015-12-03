@@ -141,7 +141,7 @@ create table Payment
 	CardType varchar(20) not null,
 	FourDigits varchar(4) not null,
 	Amount Decimal not null,
-	DateCreated datetime not null,
+	DateCreated datetime not null default getdate(),
 	PayPalID varchar(50) not null,
 	foreign key (OrderID) references Orders(OrderID)
 );

@@ -23,7 +23,7 @@ namespace SmartNerd.Models.CartViewModels
     public class PayPage
     {
         [Required]
-        [StringLength(16)]
+        [StringLength(16, MinimumLength=16)]
         public String CardNumber { get; set; }
         [Required]
         [StringLength(20)]

@@ -2,17 +2,26 @@
 @{
     ViewBag.Title = "Pay";
 }
+@using(Html.BeginForm("Pay", "Cart", FormMethod.Post))
+{ 
+    <h2>Pay</h2>
 
-<h2>Pay</h2>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CardType, new { @class = "col-sm-2 contrl-label" })
+        @Html.TextBoxFor(m => m.CardType, new { @class = "form-control" })
+    </div>
 
-<div class="form-group">
-    @Html.LabelFor(m => m.CardType, new { @class = "col-sm-2 contrl-label" })
-    @Html.TextBoxFor(m => m.CardType, new { @class = "form-control" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.CardNumber, new { @class = "col-sm-2 contrl-label" })
+        @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control" })
+    </div>
 
-    @Html.LabelFor(m => m.CardNumber, new { @class = "col-sm-2 contrl-label" })
-    @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.PayPalUsername, new { @class = "col-sm-2 contrl-label" })
+        @Html.TextBoxFor(m => m.PayPalUsername, new { @class = "form-control" })
+    </div>
 
-    @Html.LabelFor(m => m.PayPalUsername, new { @class = "col-sm-2 contrl-label" })
-    @Html.TextBoxFor(m => m.PayPalUsername, new { @class = "form-control" })
-</div>
-
+    <div class="form-group text-right">
+        <button type="submit">Place Order</button>
+    </div>
+}

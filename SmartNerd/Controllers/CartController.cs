@@ -158,6 +158,43 @@ namespace SmartNerd.Controllers
         }
         public ActionResult Pay()
         {
+            if (Cart.Products == null || Cart.Products.Count == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (Cart.OrderID == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Pay(Models.CartViewModels.PayPage model)
+        {
+            if(ModelState.IsValid)
+            {
+                if(Cart.Products == null || Cart.Products.Count == 0)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                if(Cart.OrderID == 0)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                Cart.SubmitOrder(new Payment
+                {
+                    CardNumber = model.CardNumber,
+                    CardType = model.CardType,
+                    PayPalID = model.PayPalUsername
+                });
+                Session["CartID"] = null;
+                return RedirectToAction("ThankYou", "Cart");
+            }
+            return View();
+        }
+
+        public ActionResult ThankYou ()
+        {
             return View();
         }
 	}
