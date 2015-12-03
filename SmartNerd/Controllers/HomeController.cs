@@ -4,11 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace SmartNerd.Controllers {
-    public class HomeController: BaseController {
-        public ActionResult Index() {
-            if(User.IsInRole("Administrator")) return RedirectToAction("Browse","Admin");
-            return RedirectToAction("Index","Menu");
+namespace SmartNerd.Controllers
+{
+    public class HomeController : BaseController
+    {
+        public ActionResult Index()
+        {
+            if (User.IsInRole("Administrator"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            return RedirectToAction("Index", "Menu");
         }
 
         public ActionResult About() {

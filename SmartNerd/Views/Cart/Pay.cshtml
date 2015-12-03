@@ -2,26 +2,32 @@
 @{
     ViewBag.Title = "Pay";
 }
+<style>
+    .form-group
+    {
+        padding-bottom: 40px;
+    }
+</style>
 @using(Html.BeginForm("Pay", "Cart", FormMethod.Post))
 { 
     <h2>Pay</h2>
     @Html.ValidationSummary()
     <div class="form-group">
         @Html.LabelFor(m => m.CardType, new { @class = "col-sm-2 contrl-label" })
-        @Html.TextBoxFor(m => m.CardType, new { @class = "form-control" })
+        <div class="col-sm-6">@Html.TextBoxFor(m => m.CardType, new { @class = "form-control" })</div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group clear">
         @Html.LabelFor(m => m.CardNumber, new { @class = "col-sm-2 contrl-label" })
-        @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control" })
+        <div class="col-sm-6">@Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control" })</div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group clear">
         @Html.LabelFor(m => m.PayPalUsername, new { @class = "col-sm-2 contrl-label" })
-        @Html.TextBoxFor(m => m.PayPalUsername, new { @class = "form-control" })
+        <div class="col-sm-6">@Html.TextBoxFor(m => m.PayPalUsername, new { @class = "form-control" })</div>
     </div>
 
     <div class="form-group text-right">
-        <button type="submit">Place Order</button>
+        <button type="submit" class="btn btn-primary">Place Order</button>
     </div>
 }

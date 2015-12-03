@@ -5,12 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Smart Nerd</title>
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript" src="/Scripts/chart.min.js"></script>
+
 
 </head>
 <body>
     <div id="aboveNav">
         <div class="container">
-            <a href="@Url.Action("Index", "Menu")"><img src="/Images/logo.png" /></a>
+            @if(HttpContext.Current.User.IsInRole("Administrator"))
+            {
+                <a href="@Url.Action("Index", "Admin")"><img src="/Images/logo.png" /></a>
+            }
+            else { 
+                <a href="@Url.Action("Index", "Menu")"><img src="/Images/logo.png" /></a>
+            }
         </div>
     </div>
     <div class="navbar navbar-inverse container">
@@ -78,7 +87,6 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts",required: false)
 </body>

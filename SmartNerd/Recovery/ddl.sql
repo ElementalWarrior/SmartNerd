@@ -1,14 +1,9 @@
---drop table AnonymousReview;
---drop table RegisteredReview;
---drop table Review;
 drop table CategoryEntry;
 drop table Category;
 drop table OrderProduct;
 drop table Inventory;
 drop table Product;
---drop table PickupOrder;
 drop table PhysicalLocation;
---drop table DeliveryOrder;
 drop table Orders;
 drop table AccountAddress;
 drop table Address;
@@ -45,15 +40,6 @@ create table Orders
 	AddressID int,
 	foreign key (AddressID) references Address(AddressID),
 );
-
---create table DeliveryOrder
---(
---	DeliveryOrderID int primary key,
---	OrderID int not null,
---	AccountAddressID int not null,
---	foreign key (OrderID) references Orders(OrderID),
---	foreign key (AccountAddressID) references AccountAddress(AccountAddressID)
---);
 create table PhysicalLocation
 (
 	PhysicalLocationID int primary key identity(1,1),
@@ -61,14 +47,6 @@ create table PhysicalLocation
 	LocationType varchar(20) not null,
 	constraint chk_LocationType check (locationtype in ('Store', 'Warehouse'))
 );
---create table PickupOrder
---(
---	PickupOrderID int primary key,
---	OrderID int not null,
---	PhysicalLocationID int not null,
---	foreign key (OrderID) references Orders(OrderID),
---	foreign key (PhysicalLocationID) references PhysicalLocation(PhysicalLocationID)
---);
 create table Product
 (
 	ProductID int primary key identity(1,1),
@@ -109,30 +87,6 @@ create table CategoryEntry
 	foreign key (CategoryID) references Category(CategoryID),
 	foreign key (ProductID) references Product(ProductID)
 );
---create table Review
---(
---	ReviewID int primary key,
---	Title varchar(50) not null,
---	Description text
---);
---create table RegisteredReview
---(
---	RegisteredReviewID int primary key,
---	ReviewID int not null,
---	AccountID int not null,
---	foreign key (ReviewID) references Review(ReviewID),
---	foreign key (AccountID) references Account(AccountID)
---);
---create table AnonymousReview
---(
---	AnonymousReviewID int primary key,
---	ReviewID int not null,
---	AccountID int not null,
---	FirstName varchar(50) not null,
---	LastName varchar(50) not null,
---	Email varchar(250) not null,
---	foreign key (ReviewID) references Review(ReviewID)
---);
 create table Payment
 (
 	PaymentID int primary key identity(1,1),
@@ -144,3 +98,33 @@ create table Payment
 	PayPalID varchar(50) not null,
 	foreign key (OrderID) references Orders(OrderID)
 );
+
+--CREATE TABLE [dbo].[AspNetUsers](
+--	[Id] [nvarchar](128) NOT NULL,
+--	[UserName] [nvarchar](max) NULL,
+--	[PasswordHash] [nvarchar](max) NULL,
+--	[SecurityStamp] [nvarchar](max) NULL,
+--	[FirstName] [nvarchar](max) NULL,
+--	[LastName] [nvarchar](max) NULL,
+--	[Email] [nvarchar](max) NULL,
+--	[Phone] [nvarchar](max) NULL,
+--	[Discriminator] [nvarchar](128) NOT NULL,
+--)
+
+--CREATE TABLE [dbo].[AspNetRoles](
+--	[Id] [nvarchar](128) NOT NULL,
+--	[Name] [nvarchar](max) NOT NULL,
+--)
+--CREATE TABLE [dbo].[AspNetUserRoles](
+--	[UserId] [nvarchar](128) NOT NULL,
+--	[RoleId] [nvarchar](128) NOT NULL,
+--	FOREIGN KEY([RoleId]) REFERENCES [dbo].[AspNetRoles] ([Id]),
+--	FOREIGN KEY([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id])
+--)
+
+--CREATE TABLE [dbo].[AspNetUserLogins](
+--	[UserId] [nvarchar](128) NOT NULL,
+--	[LoginProvider] [nvarchar](128) NOT NULL,
+--	[ProviderKey] [nvarchar](128) NOT NULL,
+--	FOREIGN KEY([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id])
+--)
