@@ -135,18 +135,21 @@ namespace SmartNerd
         }
         public void Save()
         {
-            _context.SubmitChanges();
 
-            //lets be horribly inefficient and save to the database again
-            //so that we can grab altered product list if it changed
-            decimal total = 0;
-            foreach(OrderProduct p in Products)
-            {
-                total += p.Price * p.Quantity;
+            if(!HttpContext.Current.User.IsInRole("Administrator")) {
+
+                _context.SubmitChanges();
+                //lets be horribly inefficient and save to the database again
+                //so that we can grab altered product list if it changed
+                decimal total = 0;
+                foreach(OrderProduct p in Products)
+                {
+                    total += p.Price * p.Quantity;
+                }
+                _order.OrderTotal = total;
+
+                _context.SubmitChanges();
             }
-            _order.OrderTotal = total;
-
-            _context.SubmitChanges();
         }
         #endregion
     }
