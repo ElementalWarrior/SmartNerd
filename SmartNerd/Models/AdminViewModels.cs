@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace SmartNerd.Models.Admin
 {
@@ -14,8 +15,10 @@ namespace SmartNerd.Models.Admin
     {
         public int ProductID { get; set; }
         public string ProductName { get; set; }
+        [AllowHtml]
         public string Description { get; set; }
         public decimal Price { get; set; }
+        public int Inventory { get; set; }
     }
     public class BrowsePage
     {
