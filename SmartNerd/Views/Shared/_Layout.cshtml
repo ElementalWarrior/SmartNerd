@@ -13,7 +13,13 @@
 <body>
     <div id="aboveNav">
         <div class="container">
-            <a href="@Url.Action("Index", "Menu")"><img src="/Images/logo.png" /></a>
+            @if(HttpContext.Current.User.IsInRole("Administrator"))
+            {
+                <a href="@Url.Action("Index", "Admin")"><img src="/Images/logo.png" /></a>
+            }
+            else { 
+                <a href="@Url.Action("Index", "Menu")"><img src="/Images/logo.png" /></a>
+            }
 </div>
     </div>
     <div class="navbar navbar-inverse container">
