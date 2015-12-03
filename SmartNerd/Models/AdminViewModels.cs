@@ -35,8 +35,16 @@ namespace SmartNerd.Models.Admin {
         public int NumberOfOrders { get; set; }
         public DateTime DatePlaced { get; set; }
     }
+    public class FrequentEntry
+    {
+        public decimal TotalRevenue { get; set; }
+        public int NumberOrdered { get; set; }
+        public int ProductID { get; set; }
+        public string Name { get; set; }
+    }
     public class ReportPage
     {
         public List<ReportEntry> DailyReport { get; set; }
+        public List<FrequentEntry> FrequentProducts { get; set; }
     }
 }

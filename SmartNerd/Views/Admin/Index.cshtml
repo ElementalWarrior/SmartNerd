@@ -8,6 +8,10 @@
 <p>Here is the daily summary.</p>
 <canvas id="myChart" width="400" height="400"></canvas>
 
+<br/>
+<p>Frequent Items</p>
+<canvas id="frequent" width="400" height="400"></canvas>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $("#myChart").width($('#myChart').parent().width() + 'px').height('300px');
@@ -87,5 +91,47 @@
         };
 
         myNewChart.Bar(data, options);
+
+        $("#frequent").width($('#frequent').parent().width() + 'px').height('300px');
+        // Get context with jQuery - using jQuery's .get() method.
+        var ctx = $("#frequent  ").get(0).getContext("2d");
+        // This will get the first returned node in the jQuery collection.
+        var freqChart = new Chart(ctx);
+
+        var data = {
+            labels: [
+                @foreach(string day in Model.FrequentProducts.Select(day => day.Name))
+            {
+            @:"@day",
+        }
+    ],
+        datasets: [{
+            label: "Total Revenue($)",
+            fillColor: "rgba(110,110,180,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            data: [
+
+                @foreach(decimal sum in Model.FrequentProducts.Select(day => day.TotalRevenue))
+                {
+            @:"@sum",
+        }
+    ]
+    },
+    {
+    label: "Total Number Ordered",
+    fillColor: "rgba(180,110,110,0.5)",
+    strokeColor: "rgba(220,220,220,0.8)",
+    data: [
+                        
+        @foreach(decimal sum in Model.FrequentProducts.Select(day => day.NumberOrdered))
+    {
+    @:"@sum",
+    }
+    ]
+    }
+    ]
+        };
+
+        freqChart.Bar(data, options);
     });
 </script>
