@@ -8,7 +8,12 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div id="aboveNav">
+        <div class="container">
+            <a href="@Url.Action("Index", "Menu")"><img src="/Images/logo.png" /></a>
+</div>
+    </div>
+    <div class="navbar navbar-inverse container">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -16,7 +21,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="@Url.Action("Index", "Home")" class="navbar-brand">Smart Nerd</a>
+                <a href="@Url.Action("Index", "Menu")" class="navbar-brand">@*Smart Nerd*@</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -26,7 +31,7 @@
                         <li>@Html.ActionLink("Search","Search","Admin")</li>
                         <li>@Html.ActionLink("Create Product","CreateProduct","Admin")</li>
                     } else {
-                        <li>@Html.ActionLink("Home","Index","Home")</li>
+                        <li>@*@Html.ActionLink("Home","Index","Home")*@</li>
                         <li>@Html.ActionLink("Browse","Index","Menu")</li>
                         <li>@Html.ActionLink("Search","Search","Menu")</li>
                         <li>@Html.ActionLink("About","About","Home")</li>

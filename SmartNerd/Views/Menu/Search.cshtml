@@ -17,9 +17,15 @@
     }
 </style>
 
-@using(Html.BeginForm("Search","Menu",new { ReturnUrl = ViewBag.ReturnUrl },FormMethod.Get,new { @class = "form-horizontal",role = "form" })) {
-    @Html.TextBoxFor(a => a.SearchTerm,new { @class = "form-control" });
+<h2>Search</h2>
+@using (Html.BeginForm("Search", "Menu", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="col-sm-3">
+        @Html.TextBoxFor(a => a.SearchTerm, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-info col-sm-2">Search</button>
 }
+<div class="clear"></div>
 
 @if(Model.Products == null) {
     <p>Your query did not return any results</p>
