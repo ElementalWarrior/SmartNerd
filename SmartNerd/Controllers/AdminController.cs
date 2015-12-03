@@ -131,12 +131,48 @@ namespace SmartNerd.Controllers {
                 var path = Path.Combine(Server.MapPath("~/Images/p"),model.ProductID.ToString() + ".png");
                 file.SaveAs(path);
             } else {
-                ModelState.AddModelError("","Image must be a valid PNG");
+                ModelState.AddModelError("","Product Image must be a valid PNG");
                 TempData["ModelState"] = ModelState;
             }
 
 
             return RedirectToAction("Product",model);
+        }
+
+        public ActionResult CreateProduct() {
+            if(TempData["ModelState"] != null && !ModelState.Equals(TempData["ModelState"]))
+                ModelState.Merge((ModelStateDictionary)TempData["ModelState"]);
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateProduct(HttpPostedFileBase file,Product model) {
+            SmartNerdDataContext db = new SmartNerdDataContext();
+
+            if(file == null || file.ContentLength == 0 || file.ContentType != "image/png") {
+                ModelState.AddModelError("","Product Image must be a valid PNG");
+                TempData["ModelState"] = ModelState;
+            }
+
+            if(ModelState.IsValid) {
+                var prod = new DataModels.Product {
+                    Description = model.Description,
+                    Inventory = model.Inventory,
+                    Name = model.ProductName,
+                    Price = model.Price
+                };
+
+                db.Products.InsertOnSubmit(prod);
+                db.SubmitChanges();
+
+                var path = Path.Combine(Server.MapPath("~/Images/p"),prod.ProductID.ToString() + ".png");
+                file.SaveAs(path);
+                return RedirectToAction("Product",new { productID = prod.ProductID });
+            }
+
+
+            return RedirectToAction("CreateProduct",model);
         }
     }
 }
