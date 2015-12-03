@@ -10,6 +10,10 @@ namespace SmartNerd.Controllers
     {
         public ActionResult Index()
         {
+            if (User.IsInRole("Administrator"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
             return RedirectToAction("Index", "Menu");
         }
 

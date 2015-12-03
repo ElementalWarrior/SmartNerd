@@ -289,6 +289,18 @@ namespace SmartNerd.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+        public ActionResult RemoveAddress(int addressID, string returnUrl)
+        {
+            SmartNerdDataContext _context = new SmartNerdDataContext();
+            DataModels.AccountAddress addrs = (from aa in _context.AccountAddresses
+                                              where aa.UserID == Cart.AccountID.ToString()
+                                              && aa.AddressID == addressID
+                                              select aa).First();
+            _context.AccountAddresses.DeleteOnSubmit(addrs);
+            _context.SubmitChanges();
+            return Redirect(returnUrl);
+
+        }
         #endregion
     }
 }

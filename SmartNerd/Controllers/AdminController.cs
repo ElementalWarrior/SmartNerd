@@ -11,7 +11,21 @@ namespace SmartNerd.Controllers {
         // GET: Admin
         [Authorize(Roles = "Administrator")]
         public ActionResult Index() {
-            return View();
+            SmartNerdDataContext _context = new SmartNerdDataContext();
+            var rprt = (from p in _context.Payments
+                        join o in _context.Orders on p.OrderID equals o.OrderID
+                        where o.DatePlaced != null
+                        group new { p, o } by o.DatePlaced.Value.Year + "-" +o.DatePlaced.Value.Month + "-" + o.DatePlaced.Value.Day into agg
+                        select new Models.Admin.ReportEntry
+                        {
+                            DatePlaced = DateTime.Parse(agg.Key),
+                            NumberOfOrders = agg.Count(),
+                            DailyTotal = agg.Sum(a => a.o.OrderTotal)
+                        }).ToList();
+            return View(new Models.Admin.ReportPage
+                {
+                    DailyReport = rprt
+                });
         }
 
         [Authorize(Roles = "Administrator")]

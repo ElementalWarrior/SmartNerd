@@ -10,7 +10,6 @@
     for (int i = 0; i < Model.MailingAddresses.Count; i++)
     {
         <div class="divAddress">
-            <a href="@Url.Action("RemoveAddress", "Account", new { addressID = Model.MailingAddresses[i].AddressID })" class="btn btn-danger">Remove</a>
             <table class="table-address">
                 <tr>
                     <td>@Html.LabelFor(m => m.MailingAddresses[i].FullName)</td>
@@ -42,6 +41,7 @@
                 </tr>
             </table>
             <button type="submit" name="AddressToUse" class="btn btn-primary" value="@Model.MailingAddresses[i].AddressID">Use this address</button>
+            <a href="@Url.Action("RemoveAddress", "Account", new { addressID = Model.MailingAddresses[i].AddressID, returnUrl = Url.Action("Address", "Cart") })" class="btn btn-danger">Remove</a>
         </div>
     }
 
@@ -80,10 +80,14 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         @Html.CheckBoxFor(m => m.SaveAddress);
-                        <text>Save this address to your account?</text>
+                        
+                        @: @Html.LabelFor(m => m.SaveAddress, "Save this address to your account?")
                     }
                 </div>
                 <button type="submit" name="AddressToUse" value="-1" class="btn btn-primary">Ship to this address</button>
             </div>
         </div>
 }
+<div style="margin-top: 20px;">
+    <a href="@Url.Action("Checkout", "Cart")" class="btn btn-warning">&lt; Back To Cart </a>
+</div>

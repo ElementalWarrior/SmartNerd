@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Smart Nerd</title>
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript" src="/Scripts/chart.min.js"></script>
+
 
 </head>
 <body>
@@ -80,7 +83,6 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts",required: false)
 </body>
