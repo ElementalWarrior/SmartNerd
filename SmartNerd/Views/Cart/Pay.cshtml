@@ -5,7 +5,7 @@
 @using(Html.BeginForm("Pay", "Cart", FormMethod.Post))
 { 
     <h2>Pay</h2>
-
+    @Html.ValidationSummary()
     <div class="form-group">
         @Html.LabelFor(m => m.CardType, new { @class = "col-sm-2 contrl-label" })
         @Html.TextBoxFor(m => m.CardType, new { @class = "form-control" })

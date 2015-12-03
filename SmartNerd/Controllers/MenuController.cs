@@ -88,7 +88,8 @@ namespace SmartNerd.Controllers
                                             Price = p.Price,
                                             ProductName = p.Name,
                                             Description = p.Description,
-                                            Quantity = 1
+                                            Quantity = 1,
+                                            Inventory = p.Inventory
                                         }).First();
 
             return View(prod);
@@ -97,15 +98,18 @@ namespace SmartNerd.Controllers
         [HttpPost]
         public ActionResult Product(Product prod)
         {
-            if(ModelState.IsValid)
+            SmartNerdDataContext _context = new SmartNerdDataContext();
+
+            if (ModelState.IsValid)
             {
-                if(Cart.OrderID == 0)
+                if (Cart.OrderID == 0)
                 {
                     Cart.Save();
                     Session["CartID"] = Cart.CartID;
                 }
                 Cart.AddProduct(prod);
                 Cart.Save();
+
             }
             return RedirectToAction("Index", "Menu");
         }
