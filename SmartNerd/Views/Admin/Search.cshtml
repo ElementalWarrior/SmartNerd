@@ -18,7 +18,7 @@
 </style>
 
 @using(Html.BeginForm("Search","Menu",new { ReturnUrl = ViewBag.ReturnUrl },FormMethod.Get,new { @class = "form-horizontal",role = "form" })) {
-    @Html.TextBoxFor(a => a.SearchTerm,new { @class = "form-control" });
+    @Html.TextBoxFor(a => a.SearchTerm,new { @class = "form-control" })
 }
 
 @if(Model.Products == null) {

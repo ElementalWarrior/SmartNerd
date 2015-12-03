@@ -3,28 +3,41 @@
     ViewBag.Title = Model.ProductName;
 }
 <div id="productPage">
-    @using(Html.BeginForm("Product","Admin",FormMethod.Post)) {
+    <img id="productPageImg" src="@SmartNerd.Classes.Util.ProductUrl(Model.ProductID)" alt="@Model.ProductName" />
+    <div id="productDetails">
+        @using(Html.BeginForm("Product","Admin",FormMethod.Post)) {
+            <div>
+                @Html.HiddenFor(m => m.ProductID)
 
-        <img id="productPageImg" src="@SmartNerd.Classes.Util.ProductUrl(Model.ProductID)" alt="@Model.ProductName" />
+                <br /><br />
+                @Html.ValidationSummary()
+                Name: @Html.TextBoxFor(m => m.ProductName,new { id = "productEditName" })
 
-        <div id="productDetails">
+                <br /><br />
+                Description: @Html.TextAreaFor(m => m.Description,new { id = "productEditDesc" })
+
+                <br /><br />
+                Price: $@Html.TextBoxFor(m => m.Price,new { id = "productEditPrice" })
+
+                <br /><br />
+                Inventory: @Html.TextBoxFor(m => m.Inventory,new { id = "productEditQty" })
+
+                <br /><br />
+                <input type="submit" value="Save changes" />
+            </div>
+        }
+        <br/><br/>
+        Product Image: @using(Html.BeginForm("UploadImage","Admin",FormMethod.Post,new { enctype = "multipart/form-data" })) {
             @Html.HiddenFor(m => m.ProductID)
+            <input type="file" name="file" />
+            <input type="submit" value="Upload" />
+        }
 
-            <br /><br />
-            Name: @Html.TextBoxFor(m => m.ProductName,new { id = "productEditName" })
-
-            <br /><br />
-            Description: @Html.TextAreaFor(m => m.Description,new { id = "productEditDesc" })
-
-            <br /><br />
-            Price: $@Html.TextBoxFor(m => m.Price,new { id = "productEditPrice" })
-
-            <br /><br />
-            Inventory: @Html.TextBoxFor(m => m.Inventory,new { id = "productEditQty" })
-
-            <br/><br/>
-            <input type="submit" value="Save changes" />
-        </div>
-    }
+        <br/><br/>
+        @using(Html.BeginForm("DeleteProduct","Admin",FormMethod.Post)) {
+            @Html.HiddenFor(m => m.ProductID)
+            <input type="submit" value="Delete item" />
+        }
+    </div>
     <div class="clear"></div>
 </div>
