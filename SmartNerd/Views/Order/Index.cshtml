@@ -15,6 +15,7 @@
             <th>Order Amount</th>
             <th>Products</th>
             <th>Address</th>
+            <th>Status</th>
         </tr>
         @foreach(var order in Model) {
             <tr align="center">
@@ -47,6 +48,7 @@
                         <p>Zip Code: @order.Address.ZipCode</p>
                     </div>
                 </td>
+                <td><p>Your order has been processed</p></td>
             </tr>
         }
     </table>
