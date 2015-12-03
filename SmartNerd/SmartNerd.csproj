@@ -248,6 +248,7 @@
     </Content>
     <Content Include="Views\Cart\Pay.cshtml" />
     <Content Include="Views\Cart\ThankYou.cshtml" />
+    <Content Include="Views\Admin\CreateProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

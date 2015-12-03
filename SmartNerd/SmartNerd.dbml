@@ -81,7 +81,7 @@
       <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Price" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
-      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" AutoSync="Never" Type="System.DateTime" DbType="DateTime NOT NULL" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Inventory" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Product_CategoryEntry" Member="CategoryEntries" ThisKey="ProductID" OtherKey="ProductID" Type="CategoryEntry" />
       <Association Name="Product_OrderProduct" Member="OrderProducts" ThisKey="ProductID" OtherKey="ProductID" Type="OrderProduct" />
