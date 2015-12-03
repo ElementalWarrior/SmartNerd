@@ -82,18 +82,31 @@ namespace SmartNerd.Models
     {
         public int AddressID { get; set; }
         [Display(Name="Full Name")]
+        [Required]
+        [StringLength(100)]
         public String FullName { get; set; }
         [Display(Name = "Address Line 1")]
+        [Required]
+        [StringLength(100)]
         public string Line1 { get; set; }
         [Display(Name = "Address Line 2")]
+        [StringLength(100)]
         public string Line2 { get; set; }
         [Display(Name = "City")]
+        [Required]
+        [StringLength(50)]
         public string City { get; set; }
         [Display(Name = "State")]
+        [Required]
+        [StringLength(2)]
         public string StateOrProvince { get; set; }
         [Display(Name = "Zip Code")]
+        [Required]
+        [StringLength(20)]
         public string ZipCode { get; set; }
         [Display(Name = "County")]
+        [Required]
+        [StringLength(2)]
         public string County { get; set; }
     }
     public class AccountAddress : Address

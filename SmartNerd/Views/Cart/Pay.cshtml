@@ -1,0 +1,18 @@
+﻿@model SmartNerd.Models.CartViewModels.PayPage
+@{
+    ViewBag.Title = "Pay";
+}
+
+<h2>Pay</h2>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.CardType, new { @class = "col-sm-2 contrl-label" })
+    @Html.TextBoxFor(m => m.CardType, new { @class = "form-control" })
+
+    @Html.LabelFor(m => m.CardNumber, new { @class = "col-sm-2 contrl-label" })
+    @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control" })
+
+    @Html.LabelFor(m => m.PayPalUsername, new { @class = "col-sm-2 contrl-label" })
+    @Html.TextBoxFor(m => m.PayPalUsername, new { @class = "form-control" })
+</div>
+

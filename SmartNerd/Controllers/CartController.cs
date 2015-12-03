@@ -109,40 +109,56 @@ namespace SmartNerd.Controllers
             if (model.AddressToUse != -1)
             {
                 Cart.AddressID = model.AddressToUse;
+                Cart.Save();
+                if (Session["CartID"] == null)
+                {
+                    Session["CartID"] = Cart.CartID;
+                }
+                return RedirectToAction("Pay", "Cart");
             }
             else
             {
-                Cart.UseNewAddress(new Address
+                TryUpdateModel(model.CartAddress);
+                if (ModelState.IsValid)
                 {
-                    City = model.CartAddress.City,
-                    Line1 = model.CartAddress.Line1,
-                    Line2 = model.CartAddress.Line2,
-                    StateOrProvince = model.CartAddress.StateOrProvince,
-                    ZipCode = model.CartAddress.ZipCode,
-                    County = model.CartAddress.County,
-                    FullName = model.CartAddress.FullName
-                });
-                if (model.SaveAddress)
-                {
-                    DataModels.AccountAddress aa = new DataModels.AccountAddress
+                    Cart.UseNewAddress(new Address
                     {
-                        UserID = User.Identity.GetUserId(),
-                        AddressID = Cart.AddressID.Value,
-                        AddressType = "Mailing"
-                    };
-                    SmartNerdDataContext _context = new SmartNerdDataContext();
-                    _context.AccountAddresses.InsertOnSubmit(aa);
-                    _context.SubmitChanges();
+                        City = model.CartAddress.City,
+                        Line1 = model.CartAddress.Line1,
+                        Line2 = model.CartAddress.Line2,
+                        StateOrProvince = model.CartAddress.StateOrProvince,
+                        ZipCode = model.CartAddress.ZipCode,
+                        County = model.CartAddress.County,
+                        FullName = model.CartAddress.FullName
+                    });
+                    if (model.SaveAddress)
+                    {
+                        DataModels.AccountAddress aa = new DataModels.AccountAddress
+                        {
+                            UserID = User.Identity.GetUserId(),
+                            AddressID = Cart.AddressID.Value,
+                            AddressType = "Mailing"
+                        };
+                        SmartNerdDataContext _context = new SmartNerdDataContext();
+                        _context.AccountAddresses.InsertOnSubmit(aa);
+                        _context.SubmitChanges();
+                    }
+                    Cart.Save();
+                    if (Session["CartID"] == null)
+                    {
+                        Session["CartID"] = Cart.CartID;
+                    }
+                    return RedirectToAction("Pay", "Cart");
                 }
             }
-            Cart.Save();
-            if (Session["CartID"] == null)
-            {
-                Session["CartID"] = Cart.CartID;
-            }
+
             Models.CartViewModels.AddressPage add = BuildAddressPage();
             add.CartAddress = model.CartAddress;
             return View(add);
+        }
+        public ActionResult Pay()
+        {
+            return View();
         }
 	}
 }

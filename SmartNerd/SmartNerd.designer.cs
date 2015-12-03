@@ -49,10 +49,13 @@ namespace SmartNerd
     partial void InsertAddress(DataModels.Address instance);
     partial void UpdateAddress(DataModels.Address instance);
     partial void DeleteAddress(DataModels.Address instance);
+    partial void InsertPayment(DataModels.Payment instance);
+    partial void UpdatePayment(DataModels.Payment instance);
+    partial void DeletePayment(DataModels.Payment instance);
     #endregion
 		
 		public SmartNerdDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["group16ConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -134,6 +137,14 @@ namespace SmartNerd
 			get
 			{
 				return this.GetTable<DataModels.Address>();
+			}
+		}
+		
+		public System.Data.Linq.Table<DataModels.Payment> Payments
+		{
+			get
+			{
+				return this.GetTable<DataModels.Payment>();
 			}
 		}
 	}
@@ -904,6 +915,8 @@ namespace DataModels
 		
 		private EntitySet<OrderProduct> _OrderProducts;
 		
+		private EntitySet<Payment> _Payments;
+		
 		private EntityRef<Address> _Address;
 		
     #region Extensibility Method Definitions
@@ -929,6 +942,7 @@ namespace DataModels
 		public Order()
 		{
 			this._OrderProducts = new EntitySet<OrderProduct>(new Action<OrderProduct>(this.attach_OrderProducts), new Action<OrderProduct>(this.detach_OrderProducts));
+			this._Payments = new EntitySet<Payment>(new Action<Payment>(this.attach_Payments), new Action<Payment>(this.detach_Payments));
 			this._Address = default(EntityRef<Address>);
 			OnCreated();
 		}
@@ -1090,6 +1104,19 @@ namespace DataModels
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Order_Payment", Storage="_Payments", ThisKey="OrderID", OtherKey="OrderID")]
+		public EntitySet<Payment> Payments
+		{
+			get
+			{
+				return this._Payments;
+			}
+			set
+			{
+				this._Payments.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Address_Order", Storage="_Address", ThisKey="AddressID", OtherKey="AddressID", IsForeignKey=true)]
 		public Address Address
 		{
@@ -1151,6 +1178,18 @@ namespace DataModels
 		}
 		
 		private void detach_OrderProducts(OrderProduct entity)
+		{
+			this.SendPropertyChanging();
+			entity.Order = null;
+		}
+		
+		private void attach_Payments(Payment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Order = this;
+		}
+		
+		private void detach_Payments(Payment entity)
 		{
 			this.SendPropertyChanging();
 			entity.Order = null;
@@ -1615,6 +1654,253 @@ namespace DataModels
 		{
 			this.SendPropertyChanging();
 			entity.Address = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Payment")]
+	public partial class Payment : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _PaymentID;
+		
+		private int _OrderID;
+		
+		private string _CardType;
+		
+		private string _FourDigits;
+		
+		private decimal _Amount;
+		
+		private System.DateTime _DateCreated;
+		
+		private string _PayPalID;
+		
+		private EntityRef<Order> _Order;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPaymentIDChanging(int value);
+    partial void OnPaymentIDChanged();
+    partial void OnOrderIDChanging(int value);
+    partial void OnOrderIDChanged();
+    partial void OnCardTypeChanging(string value);
+    partial void OnCardTypeChanged();
+    partial void OnFourDigitsChanging(string value);
+    partial void OnFourDigitsChanged();
+    partial void OnAmountChanging(decimal value);
+    partial void OnAmountChanged();
+    partial void OnDateCreatedChanging(System.DateTime value);
+    partial void OnDateCreatedChanged();
+    partial void OnPayPalIDChanging(string value);
+    partial void OnPayPalIDChanged();
+    #endregion
+		
+		public Payment()
+		{
+			this._Order = default(EntityRef<Order>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int PaymentID
+		{
+			get
+			{
+				return this._PaymentID;
+			}
+			set
+			{
+				if ((this._PaymentID != value))
+				{
+					this.OnPaymentIDChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentID = value;
+					this.SendPropertyChanged("PaymentID");
+					this.OnPaymentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", DbType="Int NOT NULL")]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					if (this._Order.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOrderIDChanging(value);
+					this.SendPropertyChanging();
+					this._OrderID = value;
+					this.SendPropertyChanged("OrderID");
+					this.OnOrderIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardType", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string CardType
+		{
+			get
+			{
+				return this._CardType;
+			}
+			set
+			{
+				if ((this._CardType != value))
+				{
+					this.OnCardTypeChanging(value);
+					this.SendPropertyChanging();
+					this._CardType = value;
+					this.SendPropertyChanged("CardType");
+					this.OnCardTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FourDigits", DbType="VarChar(4) NOT NULL", CanBeNull=false)]
+		public string FourDigits
+		{
+			get
+			{
+				return this._FourDigits;
+			}
+			set
+			{
+				if ((this._FourDigits != value))
+				{
+					this.OnFourDigitsChanging(value);
+					this.SendPropertyChanging();
+					this._FourDigits = value;
+					this.SendPropertyChanged("FourDigits");
+					this.OnFourDigitsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Decimal(18,0) NOT NULL")]
+		public decimal Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this.OnAmountChanging(value);
+					this.SendPropertyChanging();
+					this._Amount = value;
+					this.SendPropertyChanged("Amount");
+					this.OnAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", DbType="DateTime NOT NULL")]
+		public System.DateTime DateCreated
+		{
+			get
+			{
+				return this._DateCreated;
+			}
+			set
+			{
+				if ((this._DateCreated != value))
+				{
+					this.OnDateCreatedChanging(value);
+					this.SendPropertyChanging();
+					this._DateCreated = value;
+					this.SendPropertyChanged("DateCreated");
+					this.OnDateCreatedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayPalID", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string PayPalID
+		{
+			get
+			{
+				return this._PayPalID;
+			}
+			set
+			{
+				if ((this._PayPalID != value))
+				{
+					this.OnPayPalIDChanging(value);
+					this.SendPropertyChanging();
+					this._PayPalID = value;
+					this.SendPropertyChanged("PayPalID");
+					this.OnPayPalIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Order_Payment", Storage="_Order", ThisKey="OrderID", OtherKey="OrderID", IsForeignKey=true)]
+		public Order Order
+		{
+			get
+			{
+				return this._Order.Entity;
+			}
+			set
+			{
+				Order previousValue = this._Order.Entity;
+				if (((previousValue != value) 
+							|| (this._Order.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Order.Entity = null;
+						previousValue.Payments.Remove(this);
+					}
+					this._Order.Entity = value;
+					if ((value != null))
+					{
+						value.Payments.Add(this);
+						this._OrderID = value.OrderID;
+					}
+					else
+					{
+						this._OrderID = default(int);
+					}
+					this.SendPropertyChanged("Order");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

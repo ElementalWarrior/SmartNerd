@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="group16" EntityNamespace="DataModels" Class="SmartNerdDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=group16.mssql.somee.com;Initial Catalog=group16;Persist Security Info=False;User ID=group16_SQLLogin_1;Packet Size=4096;Workstation ID=group16.mssql.somee.com" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=group16.mssql.somee.com;Initial Catalog=group16;Persist Security Info=False;User ID=group16_SQLLogin_1;Packet Size=4096;Workstation ID=group16.mssql.somee.com" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="group16ConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Category" Member="Categories">
     <Type Name="Category">
       <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -47,6 +47,7 @@
       <Column Name="DatePlaced" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="AddressID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Order_OrderProduct" Member="OrderProducts" ThisKey="OrderID" OtherKey="OrderID" Type="OrderProduct" />
+      <Association Name="Order_Payment" Member="Payments" ThisKey="OrderID" OtherKey="OrderID" Type="Payment" />
       <Association Name="Address_Order" Member="Address" ThisKey="AddressID" OtherKey="AddressID" Type="Address" IsForeignKey="true" />
     </Type>
   </Table>
@@ -71,6 +72,18 @@
       <Column Name="County" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
       <Association Name="Address_Order" Member="Orders" ThisKey="AddressID" OtherKey="AddressID" Type="Order" />
       <Association Name="Address_AccountAddress" Member="AccountAddresses" ThisKey="AddressID" OtherKey="AddressID" Type="AccountAddress" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Payment" Member="Payments">
+    <Type Name="Payment">
+      <Column Name="PaymentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CardType" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="FourDigits" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PayPalID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Order_Payment" Member="Order" ThisKey="OrderID" OtherKey="OrderID" Type="Order" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

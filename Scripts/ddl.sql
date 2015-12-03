@@ -12,7 +12,7 @@ drop table PhysicalLocation;
 drop table Orders;
 drop table AccountAddress;
 drop table Address;
-
+drop table Payment;
 create table Address
 (
 	AddressID int primary key identity(1,1),
@@ -132,3 +132,15 @@ create table CategoryEntry
 --	Email varchar(250) not null,
 --	foreign key (ReviewID) references Review(ReviewID)
 --);
+
+create table Payment
+(
+	PaymentID int primary key,
+	OrderID int not null,
+	CardType varchar(20) not null,
+	FourDigits varchar(4) not null,
+	Amount Decimal not null,
+	DateCreated datetime not null,
+	PayPalID varchar(50) not null,
+	foreign key (OrderID) references Orders(OrderID)
+);

@@ -101,7 +101,7 @@ namespace SmartNerd
                 orderProd.Price = (from p in _context.Products
                                    where p.ProductID == prod.ProductID
                                    select p.Price).First();
-                Products.Add(orderProd);
+                _products = null;
             }
             else
             {
@@ -114,6 +114,7 @@ namespace SmartNerd
                                                  where op.ProductID == productID
                                                  select op).ToList();
             _context.OrderProducts.DeleteAllOnSubmit(ops);
+            _products = null;
         }
         public void UseNewAddress(Address newAddress)
         {
@@ -134,17 +135,18 @@ namespace SmartNerd
         }
         public void Save()
         {
-            //if(_order.AccountID != null) {
-                decimal total = 0;
-                foreach(OrderProduct p in Products)
-                {
-                    total += p.Price * p.Quantity;
-                }
-                _order.OrderTotal = total;
+            _context.SubmitChanges();
 
+            //lets be horribly inefficient and save to the database again
+            //so that we can grab altered product list if it changed
+            decimal total = 0;
+            foreach(OrderProduct p in Products)
+            {
+                total += p.Price * p.Quantity;
+            }
+            _order.OrderTotal = total;
 
-                _context.SubmitChanges();
-            //}
+            _context.SubmitChanges();
         }
         #endregion
     }
