@@ -202,8 +202,14 @@
     <Content Include="Images\m\4.png" />
     <Content Include="Images\m\Untitled-8.png" />
     <Content Include="Images\p\1.png" />
+    <Content Include="Images\p\104.png" />
+    <Content Include="Images\p\105.png" />
     <Content Include="Images\p\2.png" />
+    <Content Include="Images\p\206.png" />
+    <Content Include="Images\p\207.png" />
     <Content Include="Images\p\3.png" />
+    <Content Include="Images\p\308.png" />
+    <Content Include="Images\p\309.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

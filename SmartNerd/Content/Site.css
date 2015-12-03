@@ -107,3 +107,17 @@ input[type="checkbox"].input-validation-error {
 {
     background: -webkit-linear-gradient(top, #1D314C, #FFF);
 }
+#menuListing img
+{
+    display: block;
+    height: 150px;
+    max-width: 100%;
+}
+#menuListing a
+{
+    display: block;
+}
+#menuListing div {
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
