@@ -46,12 +46,12 @@ namespace SmartNerd
     partial void InsertAddress(DataModels.Address instance);
     partial void UpdateAddress(DataModels.Address instance);
     partial void DeleteAddress(DataModels.Address instance);
-    partial void InsertPayment(DataModels.Payment instance);
-    partial void UpdatePayment(DataModels.Payment instance);
-    partial void DeletePayment(DataModels.Payment instance);
     partial void InsertProduct(DataModels.Product instance);
     partial void UpdateProduct(DataModels.Product instance);
     partial void DeleteProduct(DataModels.Product instance);
+    partial void InsertPayment(DataModels.Payment instance);
+    partial void UpdatePayment(DataModels.Payment instance);
+    partial void DeletePayment(DataModels.Payment instance);
     #endregion
 		
 		public SmartNerdDataContext() : 
@@ -132,18 +132,19 @@ namespace SmartNerd
 			}
 		}
 		
-		public System.Data.Linq.Table<DataModels.Payment> Payments
-		{
-			get
-			{
-				return this.GetTable<DataModels.Payment>();
-			}
-		}
 		public System.Data.Linq.Table<DataModels.Product> Products
 		{
 			get
 			{
 				return this.GetTable<DataModels.Product>();
+			}
+		}
+		
+		public System.Data.Linq.Table<DataModels.Payment> Payments
+		{
+			get
+			{
+				return this.GetTable<DataModels.Payment>();
 			}
 		}
 	}
@@ -1445,8 +1446,9 @@ namespace DataModels
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Product")]
 	public partial class Product : INotifyPropertyChanging, INotifyPropertyChanged
 	{
-        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
 		private int _ProductID;
 		
 		private string _Name;
@@ -1462,9 +1464,10 @@ namespace DataModels
 		private EntitySet<CategoryEntry> _CategoryEntries;
 		
 		private EntitySet<OrderProduct> _OrderProducts;
-
+		
     #region Extensibility Method Definitions
-
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void OnProductIDChanging(int value);
     partial void OnProductIDChanged();
@@ -1506,6 +1509,7 @@ namespace DataModels
 				}
 			}
 		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string Name
 		{
@@ -1525,6 +1529,7 @@ namespace DataModels
 				}
 			}
 		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="Text", UpdateCheck=UpdateCheck.Never)]
 		public string Description
 		{
@@ -1544,6 +1549,7 @@ namespace DataModels
 				}
 			}
 		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Decimal(18,0) NOT NULL")]
 		public decimal Price
 		{
@@ -1563,6 +1569,7 @@ namespace DataModels
 				}
 			}
 		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", DbType="DateTime NOT NULL", IsDbGenerated=true)]
 		public System.DateTime DateCreated
 		{
@@ -1582,6 +1589,7 @@ namespace DataModels
 				}
 			}
 		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Inventory", DbType="Int NOT NULL")]
 		public int Inventory
 		{
@@ -1601,6 +1609,7 @@ namespace DataModels
 				}
 			}
 		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_CategoryEntry", Storage="_CategoryEntries", ThisKey="ProductID", OtherKey="ProductID")]
 		public EntitySet<CategoryEntry> CategoryEntries
 		{
@@ -1627,6 +1636,26 @@ namespace DataModels
 			}
 		}
 		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
 		private void attach_CategoryEntries(CategoryEntry entity)
 		{
 			this.SendPropertyChanging();
@@ -1649,27 +1678,9 @@ namespace DataModels
 		{
 			this.SendPropertyChanging();
 			entity.Product = null;
-        }
-        public event PropertyChangingEventHandler PropertyChanging;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void SendPropertyChanging()
-        {
-            if ((this.PropertyChanging != null))
-            {
-                this.PropertyChanging(this, emptyChangingEventArgs);
-            }
-        }
-
-        protected virtual void SendPropertyChanged(String propertyName)
-        {
-            if ((this.PropertyChanged != null))
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+		}
 	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Payment")]
 	public partial class Payment : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1822,7 +1833,7 @@ namespace DataModels
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", DbType="DateTime NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", AutoSync=AutoSync.OnInsert, DbType="DateTime NOT NULL", IsDbGenerated=true)]
 		public System.DateTime DateCreated
 		{
 			get
