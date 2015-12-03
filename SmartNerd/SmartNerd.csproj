@@ -255,6 +255,7 @@
     <Content Include="Views\Cart\Pay.cshtml" />
     <Content Include="Views\Cart\ThankYou.cshtml" />
     <Content Include="Views\Admin\CreateProduct.cshtml" />
+    <Content Include="Views\Admin\Recovery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

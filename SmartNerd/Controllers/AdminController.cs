@@ -174,5 +174,10 @@ namespace SmartNerd.Controllers {
 
             return RedirectToAction("CreateProduct",model);
         }
+
+        public ActionResult Recovery(Boolean? recover) {
+            if(recover.HasValue) ModelState.AddModelError("","Database recovered");
+            return View(recover);
+        }
     }
 }
