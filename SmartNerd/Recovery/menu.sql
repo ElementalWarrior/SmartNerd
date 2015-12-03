@@ -11,6 +11,9 @@ select 4,	'Star Mons' UNION
 select 1, '' where 1=0
 set identity_insert category off
 
+DBCC CHECKIDENT(Category,RESEED,1);
+DBCC CHECKIDENT(Category);
+
 set identity_insert product on
 insert into Product (ProductID, Name, Description, Price)
 select 1,	'RaMan T-Shirt',	'Using the power of the databases, the RaMan t-shirt will protect the world from malformed database designs and ill-conceived data warehousing structures.<br/><br/>One Size Fits all!', 20 UNION
@@ -24,6 +27,9 @@ select 308,	'Star Mons Speeder','Got Confused with Star Mons and Le Mons? Well t
 select 309,	'The Farce',		'The next best thing to The Force! The Farce!', 5000 UNION
 select 1, '', '', 0 where 1=0
 set identity_insert product off
+
+DBCC CHECKIDENT(Product,RESEED,1);
+DBCC CHECKIDENT(Product);
 
 insert into CategoryEntry(CategoryID, ProductID)
 select 1, ProductID from Product where ProductID Between 1 and 100 UNION
