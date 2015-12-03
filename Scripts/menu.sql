@@ -27,6 +27,7 @@ set identity_insert product off
 
 insert into CategoryEntry(CategoryID, ProductID)
 select 1, ProductID from Product where ProductID Between 1 and 100 UNION
-select 2, ProductID from Product where ProductID Between 201 and 300 UNION
-select 3, ProductID from Product where ProductID Between 301 and 400 UNION
+select 2, ProductID from Product where ProductID Between 101 and 200 UNION
+select 3, ProductID from Product where ProductID Between 201 and 300 UNION
+select 4, ProductID from Product where ProductID Between 301 and 400 UNION
 select 1,1 where 1=0
