@@ -75,7 +75,8 @@ create table Product
 	Name varchar(50) not null,
 	Description text,
 	Price decimal not null,
-	DateCreated datetime not null default getdate()
+	DateCreated datetime not null default getdate(),
+	Inventory int not null default 0
 );
 create table Inventory
 (

@@ -86,7 +86,7 @@ namespace SmartNerd.Controllers {
                                 Price = p.Price,
                                 ProductName = p.Name,
                                 Description = p.Description,
-                                Inventory = 0
+                                Inventory = p.Inventory
                             }).First();
 
             return View(prod);
@@ -100,6 +100,7 @@ namespace SmartNerd.Controllers {
             prod.Description = model.Description;
             prod.Name = model.ProductName;
             prod.Price = model.Price;
+            prod.Inventory = model.Inventory;
 
             db.SubmitChanges();
 
@@ -127,7 +128,7 @@ namespace SmartNerd.Controllers {
         [HttpPost]
         public ActionResult UploadImage(HttpPostedFileBase file,Product model) {
             if(file != null && file.ContentLength > 0 && file.ContentType == "image/png") {
-                var path = Path.Combine(Server.MapPath("~/Images/p"),model.ProductID.ToString()+".png");
+                var path = Path.Combine(Server.MapPath("~/Images/p"),model.ProductID.ToString() + ".png");
                 file.SaveAs(path);
             } else {
                 ModelState.AddModelError("","Image must be a valid PNG");
