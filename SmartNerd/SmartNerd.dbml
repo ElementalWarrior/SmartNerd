@@ -41,9 +41,9 @@
     <Type Name="Order">
       <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="AccountID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="CartID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="CartID" AutoSync="OnInsert" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="OrderTotal" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
-      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" AutoSync="OnInsert" Type="System.DateTime" DbType="DateTime NOT NULL" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="DatePlaced" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="AddressID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Order_OrderProduct" Member="OrderProducts" ThisKey="OrderID" OtherKey="OrderID" Type="OrderProduct" />

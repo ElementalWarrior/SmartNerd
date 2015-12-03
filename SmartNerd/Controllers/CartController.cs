@@ -38,6 +38,16 @@ namespace SmartNerd.Controllers
             };
             return View(c);
         }
+        [HttpPost]
+        public ActionResult Checkout(Models.CartViewModels.CheckoutPage model)
+        {
+            foreach(var p in model.Products)
+            {
+                Cart.Products.Where(prod => prod.ProductID == p.ProductID).ToList().ForEach(prod => prod.Quantity = p.Quantity);
+            }
+            Cart.Save();
+            return RedirectToAction("Address", "Cart");
+        }
         private Models.CartViewModels.AddressPage BuildAddressPage()
         {
 
@@ -96,7 +106,7 @@ namespace SmartNerd.Controllers
         [HttpPost]
         public ActionResult Address(Models.CartViewModels.AddressPage model)
         {
-            if(model.AddressToUse != -1)
+            if (model.AddressToUse != -1)
             {
                 Cart.AddressID = model.AddressToUse;
             }
@@ -112,7 +122,7 @@ namespace SmartNerd.Controllers
                     County = model.CartAddress.County,
                     FullName = model.CartAddress.FullName
                 });
-                if(model.SaveAddress)
+                if (model.SaveAddress)
                 {
                     DataModels.AccountAddress aa = new DataModels.AccountAddress
                     {
@@ -126,7 +136,10 @@ namespace SmartNerd.Controllers
                 }
             }
             Cart.Save();
-            Session["CartID"] = Cart.CartID;
+            if (Session["CartID"] == null)
+            {
+                Session["CartID"] = Cart.CartID;
+            }
             Models.CartViewModels.AddressPage add = BuildAddressPage();
             add.CartAddress = model.CartAddress;
             return View(add);

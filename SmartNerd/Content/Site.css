@@ -75,6 +75,7 @@ input[type="checkbox"].input-validation-error {
     border-radius: 15px;
     display: inline-block;
     margin-bottom: 20px;
+    margin-right: 20px;
     padding: 15px;
     width: 250px;
 }
@@ -99,4 +100,8 @@ input[type="checkbox"].input-validation-error {
 
 #productEditPrice {
     width: 80px;
+}
+.prodQty
+{
+    width: 30px;
 }

@@ -973,7 +973,7 @@ namespace DataModels
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CartID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CartID", AutoSync=AutoSync.OnInsert, DbType="UniqueIdentifier NOT NULL", IsDbGenerated=true)]
 		public System.Guid CartID
 		{
 			get
@@ -1013,7 +1013,7 @@ namespace DataModels
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", DbType="DateTime NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", AutoSync=AutoSync.OnInsert, DbType="DateTime NOT NULL", IsDbGenerated=true)]
 		public System.DateTime DateCreated
 		{
 			get

@@ -37,7 +37,7 @@ create table AccountAddress
 create table Orders
 (
 	OrderID int primary key identity(1,1),
-	AccountID uniqueidentifier not null,
+	AccountID uniqueidentifier,
 	CartID uniqueidentifier default newid() not null,
 	OrderTotal decimal not null,
 	DateCreated datetime not null default getdate(),
