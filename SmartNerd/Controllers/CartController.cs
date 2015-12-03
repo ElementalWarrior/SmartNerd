@@ -19,7 +19,7 @@ namespace SmartNerd.Controllers
             return RedirectToAction("Checkout", "Cart");
         }
 
-        public ActionResult Checkout()
+        public ActionResult Checkout(bool? noProducts = null)
         {
             SmartNerdDataContext _context = new SmartNerdDataContext();
             Models.CartViewModels.CheckoutPage c = new Models.CartViewModels.CheckoutPage
@@ -36,6 +36,10 @@ namespace SmartNerd.Controllers
                            }).ToList(),
                 Total = Cart.Total
             };
+            if(noProducts.HasValue)
+            {
+                ModelState.AddModelError("", "You must have products in your cart to continue");
+            }
             return View(c);
         }
         [HttpPost]
@@ -50,7 +54,11 @@ namespace SmartNerd.Controllers
             {
                 DataModels.Product dataProduct = dataProducts.First(pr => pr.ProductID == p.ProductID);
                 Cart.Products.Where(prod => prod.ProductID == p.ProductID).ToList().ForEach(prod => prod.Quantity = p.Quantity);
-
+                foreach(var pr in Cart.Products.Where(prod => prod.Quantity < 1))
+                {
+                    Cart.RemoveProduct(pr.ProductID);
+                }
+                
                 if (dataProduct.Inventory - p.Quantity < 0)
                 {
                     ModelState.AddModelError("", "There isn't sufficient inventory to place this order (" + dataProduct.Name + ": " + dataProduct.Inventory + ").");
@@ -127,6 +135,10 @@ namespace SmartNerd.Controllers
         }
         public ActionResult Address()
         {
+            if(Cart.Products.Count == 0)
+            {
+                return RedirectToAction("Checkout", "Cart", new { noProducts = true });
+            }
             Models.CartViewModels.AddressPage add = BuildAddressPage();
             return View(add);
         }

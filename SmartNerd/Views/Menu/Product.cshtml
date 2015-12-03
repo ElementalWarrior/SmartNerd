@@ -1,6 +1,7 @@
 ﻿@model SmartNerd.Models.Menu.Product
 @{
     ViewBag.Title = Model.ProductName;
+    ViewBag.ShowSidebar = true;
 }
 <div id="productPage">
     @using (Html.BeginForm("Product", "Menu", FormMethod.Post))

@@ -10,6 +10,17 @@ namespace SmartNerd.Controllers
     public class BaseController : Controller
     {
         private Cart _cart;
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        {
+            base.Initialize(requestContext);
+            SmartNerdDataContext _context = new SmartNerdDataContext();
+            ViewBag.Categories = (from c in _context.Categories
+                          select new Models.Menu.Category
+                          {
+                              CategoryID = c.CategoryID,
+                              CategoryName = c.Name
+                          }).ToList();
+        }
         public Cart Cart
         {
             get

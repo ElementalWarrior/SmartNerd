@@ -1,6 +1,7 @@
 ﻿@model SmartNerd.Models.CartViewModels.CheckoutPage
 @{
     ViewBag.Title = "Checkout";
+    ViewBag.ShowSidebar = true;
 }
 @using(Html.BeginForm("Checkout", "Cart", FormMethod.Post))
 { 
@@ -27,8 +28,8 @@
                     <td>@p.ProductName</td>
                     <td>@Html.HiddenFor(m => m.Products[i].ProductID)
                     @Html.TextBoxFor(m => m.Products[i].Quantity, new { @class = "prodQty" })</td>
-                    <td>@p.Price</td>
-                    <td>@(p.Price * p.Quantity)</td>
+                    <td>$@p.Price</td>
+                    <td>$@(p.Price * p.Quantity)</td>
                 </tr>
                 i++;
             }
@@ -37,14 +38,19 @@
             <tr>
                 <td colspan="3"></td>
                 <td class="text-right"><b>Order Total</b></td>
-                <td>@Model.Total</td>
+                <td>$@Model.Total</td>
             </tr>
         </tfoot>
     </table>
-
-        <div class="text-right">
+    <div class="row">
+        <div class="text-left col-sm-6">
+            <a href="@Url.Action("Index", "Menu")" class="btn btn-warning">&lt; Back to Menu</a>
+        </div>
+        <div class="text-right col-sm-6">
             <button type="submit" class="btn btn-primary">Continue &gt;</button>
         </div>
+    </div>
+    <div class="clear"></div>
     }
     else
     {

@@ -40,12 +40,6 @@ namespace SmartNerd.Controllers
                         }).ToList();
             }
             Models.Menu.MenuPage mp = new Models.Menu.MenuPage{
-                Categories = (from c in dc.Categories
-                            select new Models.Menu.Category
-                            {
-                                CategoryID = c.CategoryID,
-                                CategoryName = c.Name
-                            }).ToList(),
                 Products = prods,
                 CategoryID = 0
             };
@@ -111,7 +105,7 @@ namespace SmartNerd.Controllers
                 Cart.Save();
 
             }
-            return RedirectToAction("Index", "Menu");
+            return RedirectToAction("Checkout", "Cart");
         }
 
         public ActionResult RemoveProduct(int productID, string returnUrl)
