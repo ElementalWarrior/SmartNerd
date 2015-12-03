@@ -20,6 +20,7 @@ namespace SmartNerd.Models.Menu
     }
     public class MenuPage
     {
+        public int CategoryID { get; set; }
         public List<Category> Categories { get; set; }
         public List<Product> Products { get; set; }
     }

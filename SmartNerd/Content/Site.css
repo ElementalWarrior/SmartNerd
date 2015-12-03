@@ -105,3 +105,8 @@ input[type="checkbox"].input-validation-error {
 {
     width: 30px;
 }
+#menuBanner
+{
+    height: auto;
+    width: 100%;
+}

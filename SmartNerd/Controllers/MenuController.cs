@@ -46,8 +46,13 @@ namespace SmartNerd.Controllers
                                 CategoryID = c.CategoryID,
                                 CategoryName = c.Name
                             }).ToList(),
-                Products = prods
+                Products = prods,
+                CategoryID = 0
             };
+            if(categoryID != null)
+            {
+                mp.CategoryID = categoryID.Value;
+            }
             return View(mp);
         }
 
