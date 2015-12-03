@@ -1,5 +1,52 @@
-﻿@{
+﻿@model SmartNerd.Models.Order.Order
+@{
     ViewBag.Title = "Thank You, Come again!";
+}
+
+@if(Model == null) {
+    <p>You shouldn't be here...</p>
+} else {
+    <h2>Order Summary</h2>
+
+    <table border="1">
+        <tr align="center">
+            <th>Order Date</th>
+            <th>Order Amount</th>
+            <th>Products</th>
+            <th>Address</th>
+        </tr>
+        <tr align="center">
+            <td>@Model.DatePlaced.ToString()</td>
+            <td>$@Model.Total.ToString()</td>
+            <td>
+                <table border="1">
+                    <tr align="center">
+                        <th>Product Name</th>
+                        <th>Unit Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                    @foreach(var product in Model.Products) {
+                        <tr align="center">
+                            <td>@product.Name</td>
+                            <td>$@product.Price.ToString()</td>
+                            <td>@product.Quantity.ToString()</td>
+                        </tr>
+                    }
+                </table>
+            </td>
+            <td>
+                <div>
+                    <p>Name: @Model.Address.FullName</p>
+                    <p>Line 1: @Model.Address.Line1</p>
+                    <p>Line 2: @Model.Address.Line2</p>
+                    <p>City: @Model.Address.City</p>
+                    <p>Country: @Model.Address.County</p>
+                    <p>State/Province: @Model.Address.StateOrProvince</p>
+                    <p>Zip Code: @Model.Address.ZipCode</p>
+                </div>
+            </td>
+        </tr>
+    </table>
 }
 
 <h2 class="text-center">Thank You, Come again!</h2>

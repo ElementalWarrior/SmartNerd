@@ -11,7 +11,7 @@
     <div id="aboveNav">
         <div class="container">
             <a href="@Url.Action("Index", "Menu")"><img src="/Images/logo.png" /></a>
-</div>
+        </div>
     </div>
     <div class="navbar navbar-inverse container">
         <div class="container">
@@ -36,8 +36,11 @@
                         <li>@Html.ActionLink("Browse","Index","Menu")</li>
                         <li>@Html.ActionLink("Search","Search","Menu")</li>
                         @*<li>@Html.ActionLink("About","About","Home")</li>
-                        <li>@Html.ActionLink("Contact","Contact","Home")</li>*@
+                            <li>@Html.ActionLink("Contact","Contact","Home")</li>*@
                         <li>@Html.ActionLink("View Cart","Checkout","Cart")</li>
+                        if(User.Identity.IsAuthenticated) {
+                            <li>@Html.ActionLink("View Orders","Index","Order")</li>
+                        }
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -45,29 +48,24 @@
         </div>
     </div>
     <div class="container body-content">
-        @if(IsSectionDefined("banner"))
-        {
+        @if(IsSectionDefined("banner")) {
             @RenderSection("banner")
         }
-        @if(ViewBag.ShowSidebar != null && ViewBag.ShowSidebar)
-        { 
-        <div class="col-sm-2">
-            <div class="sideCategory">
-                <h3>Categories</h3>
-                <ol>
-                    @foreach (var cat in ViewBag.Categories)
-                    {
-                        <li><a href="@Url.Action("Index", "Menu", new {categoryID = cat.CategoryID})">@cat.CategoryName</a></li>
-                    }
-                </ol>
+        @if(ViewBag.ShowSidebar != null && ViewBag.ShowSidebar) {
+            <div class="col-sm-2">
+                <div class="sideCategory">
+                    <h3>Categories</h3>
+                    <ol>
+                        @foreach(var cat in ViewBag.Categories) {
+                            <li><a href="@Url.Action("Index", "Menu", new {categoryID = cat.CategoryID})">@cat.CategoryName</a></li>
+                        }
+                    </ol>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-10">
-            @RenderBody()
-        </div>
-        }
-        else
-        {
+            <div class="col-sm-10">
+                @RenderBody()
+            </div>
+        } else {
             @RenderBody()
         }
         <div class="clear"></div>
@@ -75,8 +73,8 @@
         <footer>
             <p>&copy; @DateTime.Now.Year - Smart Nerd</p>
             @*@if(!User.IsInRole("Administrator")) {
-                @Newtonsoft.Json.JsonConvert.SerializeObject(((SmartNerd.Controllers.BaseController)this.ViewContext.Controller).Cart);
-            }*@
+                    @Newtonsoft.Json.JsonConvert.SerializeObject(((SmartNerd.Controllers.BaseController)this.ViewContext.Controller).Cart);
+                }*@
         </footer>
     </div>
 
