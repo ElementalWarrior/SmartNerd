@@ -134,7 +134,7 @@ namespace SmartNerd
         }
         public void Save()
         {
-            //if(_order.AccountID != null) {
+            if(!HttpContext.Current.User.IsInRole("Administrator")) {
                 decimal total = 0;
                 foreach(OrderProduct p in Products)
                 {
@@ -144,7 +144,7 @@ namespace SmartNerd
 
 
                 _context.SubmitChanges();
-            //}
+            }
         }
         #endregion
     }
