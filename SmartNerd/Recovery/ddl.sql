@@ -133,10 +133,9 @@ create table CategoryEntry
 --	Email varchar(250) not null,
 --	foreign key (ReviewID) references Review(ReviewID)
 --);
-
 create table Payment
 (
-	PaymentID int primary key,
+	PaymentID int primary key identity(1,1),
 	OrderID int not null,
 	CardType varchar(20) not null,
 	FourDigits varchar(4) not null,
