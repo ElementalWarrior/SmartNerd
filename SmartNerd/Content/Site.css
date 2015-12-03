@@ -40,23 +40,23 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
-#productPageImg
-{
+
+#productPageImg {
     float: left;
     max-width: 300px;
     vertical-align: top;
 }
-#productDetails
-{
+
+#productDetails {
     margin-left: 300px;
     vertical-align: top;
 }
-#productEditQty
-{
+
+#productEditQty {
     width: 40px;
 }
-.clear
-{
+
+.clear {
     clear: both;
 }
 #newAddress
@@ -82,7 +82,21 @@ input[type="checkbox"].input-validation-error {
 {
     padding-right: 10px;
 }
-#saveAddress
-{
+#saveAddress {
     margin-bottom: 10px;
+}
+
+#productEditName {
+    width: 100%;
+    max-width: none;
+}
+
+#productEditDesc {
+    width: 100%;
+    max-width: none;
+    min-height: 200px;
+}
+
+#productEditPrice {
+    width: 80px;
 }

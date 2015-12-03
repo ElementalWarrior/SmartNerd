@@ -244,6 +244,7 @@
     </Content>
     <Content Include="Views\Cart\Checkout.cshtml" />
     <Content Include="Views\Cart\Address.cshtml" />
+    <Content Include="Views\Admin\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
