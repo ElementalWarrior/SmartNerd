@@ -10,7 +10,7 @@ namespace SmartNerd.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Menu");
         }
 
         public ActionResult About()

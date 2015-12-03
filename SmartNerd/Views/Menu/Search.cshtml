@@ -30,7 +30,10 @@
 <div class="clear"></div>
 
 @if(Model.Products == null) {
-    <p>Your query did not return any results</p>
+    if(Model.SearchTerm != null)
+    { 
+        <p>Your query did not return any results</p>
+    }
 } else {
     <div id="menuListing" class="row">
         @foreach(var prod in Model.Products) {
